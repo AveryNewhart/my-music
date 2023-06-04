@@ -1,5 +1,7 @@
 const { gql } = require("apollo-server-express");
 
+//! HAVE TO CREATE THE types AND inputs for music, reviews, saved music. 
+
 const typeDefs = gql`
   type User {
     id: ID!
@@ -25,6 +27,8 @@ const typeDefs = gql`
     users: [User]
     protected: User
   }
+
+#!! //! make sure to add the mutations for adding reviews, saving music, etc.
 
   type Mutation {
     createUser(input: CreateUserInput!): Auth

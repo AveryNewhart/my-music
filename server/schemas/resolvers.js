@@ -1,4 +1,4 @@
-//!Makes sure the user must be logged in to post a review  //!Will add more models when we hash them out in queries and mutations
+//! have to create the mutations for reviews, saving music. 
 
 const { AuthenticationError } = require("apollo-server-express");
 const { signToken } = require("../utils/auth");

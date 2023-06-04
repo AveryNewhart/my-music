@@ -12,6 +12,9 @@ import { BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 // import AuthService from './utils/auth';
 
 import Home from './pages/Home';
+import Login from './pages/Login';
+import Profile from './pages/Profile';
+import Feed from './pages/Feed';
 
 
 // Construct our main GraphQL API endpoint
@@ -49,6 +52,18 @@ function App() {
             <Route 
                 path="/"
                 element={<Home />}
+              />
+                 <Route 
+                path="/login"
+                element={<Login />}
+              />
+                    <Route 
+                path="/profile"
+                element={<Profile />}
+              />
+                      <Route 
+                path="/feed"
+                element={<Feed />}
               />
             </Routes>
           </div>

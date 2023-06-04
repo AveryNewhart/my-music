@@ -1,5 +1,6 @@
 const { model, Schema } = require("mongoose");
 const bcrypt = require("bcrypt");
+//! call in and reference the music and review models to be associated with the user model.
 
 const UserSchema = new Schema({
   username: {
