@@ -24,7 +24,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/AveryNewhart/YOUR-MOVIES.git"
+    "url": "git+https://github.com/AveryNewhart/my-music.git"
   },
   "keywords": [
     "graphQL",
@@ -33,7 +33,7 @@
     "MongoDB"
   ],
   "bugs": {
-    "url": "https://github.com/AveryNewhart/YOUR-MOVIES/issues"
+    "url": "https://github.com/AveryNewhart/my-music/issues"
   },
-  "homepage": "https://github.com/AveryNewhart/YOUR-MOVIES#readme"
+  "homepage": "https://github.com/AveryNewhart/my-music#readme"
 }
