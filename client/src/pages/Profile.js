@@ -1,5 +1,5 @@
 import React from 'react'
-// import Navigation from "../components/Nav.js";
+import Navigation from "../components/Navigation.js";
 // import { useParams } from "react-router-dom";
 // import { useQuery } from '@apollo/client';
 // import { QUERY_PROTECTED } from "../utils/queries";
@@ -16,6 +16,7 @@ import "../styles/Profile.css";
 const Profile = () => {
     return (
       <div>
+        <Navigation />
     <div>
         <h1>profile page</h1>
         <p>this page will have all of the users saved music, also all of their reviews they have written about music too.</p>
