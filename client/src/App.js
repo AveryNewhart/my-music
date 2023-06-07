@@ -15,6 +15,7 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 import Profile from './pages/Profile';
 import Feed from './pages/Feed';
+import Signup from './pages/Signup';
 
 
 // Construct our main GraphQL API endpoint
@@ -64,6 +65,10 @@ function App() {
                       <Route 
                 path="/feed"
                 element={<Feed />}
+              />
+                          <Route 
+                path="/signup"
+                element={<Signup />}
               />
             </Routes>
           </div>
