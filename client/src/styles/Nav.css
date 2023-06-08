@@ -1,0 +1,57 @@
+/* CSS HEX
+--ash-gray: #bac1b8ff;
+--moonstone: #58a4b0ff;
+--dark-spring-green: #0c7c59ff;
+--gunmetal: #2b303aff;
+--ultra-violet: #6c698dff; */
+
+  @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Metal+Mania&family=Rubik+Puddles&family=Zen+Dots&display=swap');
+
+.back-nav {
+    /* background-color: rgba(33, 32, 32, 0.992); */
+    background-color: #001233;
+    border-bottom: 5px solid #5bc0be;
+    width: 100vw;
+}
+
+.header-head {
+    color: #5bc0be;
+    width: 100%;
+    margin-left: 1%;
+    font-family: 'Rubik Puddles';
+}
+
+.container-pos {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+}
+
+a.nav-link {
+    color: #5bc0be;
+    font-weight: bolder;
+    font-family: 'Rubik Puddles';
+}
+
+a.nav-link:hover {
+    background: hsl(263, 87%, 35%);
+    color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 5px #5bc0be, 0 0 25px #5bc0be, 0 0 50px #5bc0be,
+      0 0 100px #5bc0be;
+  }
+
+  nav.back-nav.navbar.navbar-expand-sm.navbar-light.fixed-top {
+    position: relative;
+    top: 0;
+    right: 0;
+    left: 0;
+  }
+
+@media (max-width: 576px) {
+
+    .header-head {
+      text-align: center;
+    }
+
+}

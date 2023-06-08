@@ -1,0 +1,29 @@
+.profile-picture {
+    max-width: 100px; 
+    height: auto;
+  }
+
+div.card.card-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    background-color: #5bc0be;
+    margin-top: 15px;
+    margin-left: 40vw;
+    margin-right: 40vw;
+    border-radius: 10px;
+    border: 2px solid hsl(263, 87%, 35%);
+  }
+
+ .usernameArea {
+    color: #5bc0be;
+ }
+
+ div.card-body {
+    background-color: #001233;
+    border-radius: 10px;
+    margin-bottom: 5px;
+    border: 2px solid hsl(263, 87%, 35%);
+ }
+

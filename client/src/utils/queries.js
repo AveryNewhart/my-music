@@ -35,24 +35,24 @@ query protected {
     id
     username
     email
-    savedMusic {
-        musicId
-        artist
-        albumName
-        songName
-        releaseDate
-        genre
-    }
-    reviews {
-      reviewId
-      reviewText
-      reviewAuthor
-      musicTitle {
-        artist
-        albumName
-        songName
-      }
-    }
+    # savedMusic {
+    #     musicId
+    #     artist
+    #     albumName
+    #     songName
+    #     releaseDate
+    #     genre
+    # }
+    # reviews {
+    #   reviewId
+    #   reviewText
+    #   reviewAuthor
+    #   musicTitle {
+    #     artist
+    #     albumName
+    #     songName
+    #   }
+    # }
 
   }
 }
