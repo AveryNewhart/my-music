@@ -14,15 +14,32 @@ const getAlbumData = async (searchTerm) => {
     }
   };
 
-  try {
-    const response = await fetch(url, options);
-    console.log(url, options)
-    const result = await response.text();
-    return result;
-  } catch (error) {
-    console.error(error);
-    throw new Error('Error retrieving data from the third-party API.');
+//   try {
+//     const response = await fetch(url, options);
+//     console.log(url, options)
+//     const result = await response.text();
+//     return result;
+//   } catch (error) {
+//     console.error(error);
+//     throw new Error('Error retrieving data from the third-party API.');
+//   }
+// };
+try {
+  const response = await fetch(url, options);
+  const result = await response.json(); // Parse the response as JSON
+
+  if (result.album) {
+    // Extract the albums array from the result object
+    const albums = result.album;
+
+    return albums;
+  } else {
+    return []; // Return an empty array if no albums found
   }
+} catch (error) {
+  console.error(error);
+  throw new Error('Error retrieving data from the third-party API.');
+}
 };
 
 module.exports = {

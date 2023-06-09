@@ -5,7 +5,7 @@ import { searchAlbums } from '../api/api';
 
 const SearchForm = () => {
   const [searchTerm, setSearchTerm] = useState('');
-  const [result, setResult] = useState('');
+  const [result, setResult] = useState([]);
 
   // const handleSearch = () => {
   //   fetch(`/api/albums?searchTerm=${encodeURIComponent(searchTerm)}`)
@@ -17,18 +17,19 @@ const SearchForm = () => {
     try {
       const albums = await searchAlbums(searchTerm);
       console.log(albums); // Add this line to check the value
-      // const albumTitle = albums.strAlbum; // Access the album title
-      // const artistName = albums.strArtist; // Access the artist name
-      // const yearReleased = albums.intYearReleased; // Access the year released
+        // Extract the required information from the albums object
+        const albumData = albums.map(album => ({
+          artistName: album.strArtist,
+          albumName: album.strAlbum,
+          releaseDate: album.intYearReleased
+        }));
+  
+        setResult(albumData);
 
-          // Log the properties of the albums object
-    // console.log('Album Title:', albums.strAlbum);
-    // console.log('Artist Name:', albums.strArtist);
-    // console.log('Year Released:', albums.intYearReleased);
-      // ...and so on
+
 
       // const albumDetails = `Title: ${albumTitle}\nArtist: ${artistName}\nYear Released: ${yearReleased}`;
-      setResult(albums);
+      // setResult(albums);
     } catch (error) {
       console.error(error);
       setResult('Error retrieving album data.');
@@ -43,7 +44,16 @@ const SearchForm = () => {
         onChange={(e) => setSearchTerm(e.target.value)}
       />
       <button onClick={handleSearch}>Search</button>
-      <div>{result}</div>
+      {/* <div>{result}</div> */}
+      <div>
+      {result.map((album, index) => (
+          <div key={index}>
+            <p>Artist: {album.artistName}</p>
+            <p>Album: {album.albumName}</p>
+            <p>Release Date: {album.releaseDate}</p>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
