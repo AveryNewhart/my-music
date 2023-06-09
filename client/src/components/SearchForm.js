@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 // import { searchAlbums } from '...server/api'; // Update the import statement to match your file path
 import { searchAlbums } from '../api/api';
+import "../styles/SearchForm.css"
 
 
 const SearchForm = () => {
@@ -21,7 +22,8 @@ const SearchForm = () => {
         const albumData = albums.map(album => ({
           artistName: album.strArtist,
           albumName: album.strAlbum,
-          releaseDate: album.intYearReleased
+          releaseDate: album.intYearReleased,
+          albumPic: album.strAlbumThumb
         }));
   
         setResult(albumData);
@@ -51,6 +53,8 @@ const SearchForm = () => {
             <p>Artist: {album.artistName}</p>
             <p>Album: {album.albumName}</p>
             <p>Release Date: {album.releaseDate}</p>
+            <img src={album.albumPic} alt="" className='coverArt'/>
+            {/* <image alt=''>{album.albumPic}</image> */}
           </div>
         ))}
       </div>
