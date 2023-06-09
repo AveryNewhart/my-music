@@ -47,14 +47,21 @@ const SearchForm = () => {
       />
       <button onClick={handleSearch}>Search</button>
       {/* <div>{result}</div> */}
-      <div>
+      <div className='albumMain'>
       {result.map((album, index) => (
-          <div key={index}>
+          <div key={index} className="albumInside">
             <p>Artist: {album.artistName}</p>
             <p>Album: {album.albumName}</p>
             <p>Release Date: {album.releaseDate}</p>
             <img src={album.albumPic} alt="" className='coverArt'/>
             {/* <image alt=''>{album.albumPic}</image> */}
+            <button variant="primary" className="" 
+            // onClick={() => handleSaveToWatched(movie.id)}
+            >
+              Save to Listened</button>
+            <button variant="primary" className="" 
+            // onClick={() => handleSaveToWatchlist(movie.id)}
+            >Save to Wanna Listen</button>
           </div>
         ))}
       </div>
