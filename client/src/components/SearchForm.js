@@ -65,6 +65,7 @@ const SearchForm = () => {
             // onClick={() => handleSaveToWatchlist(movie.id)}
             >Save to Wanna Listen</button>
             </div>
+            <button className='reviewBtn'>Add Review</button>
           </div>
         ))}
       </div>
