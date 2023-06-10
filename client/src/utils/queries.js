@@ -6,6 +6,7 @@ query user($username: String!) {
     id
     username
     email
+    profilePicture
     savedMusic {
         musicId
         artist
@@ -35,6 +36,7 @@ query protected {
     id
     username
     email
+    profilePicture
     # savedMusic {
     #     musicId
     #     artist

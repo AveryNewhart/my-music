@@ -8,6 +8,7 @@ import {
 import { useParams } from "react-router-dom";
 import { useQuery } from '@apollo/client';
 import { QUERY_PROTECTED } from "../utils/queries";
+import ProfilePicture from '../components/ProfilePicture';
 // import Userfront from "@userfront/core";
 // import {  Alert } from "react-bootstrap";
 // import Auth from "../utils/auth";
@@ -50,6 +51,7 @@ const UserCard = () => {
     <MDBCardText className='usernameArea'>
     {user.username || 'User Name'}
     </MDBCardText>
+              <ProfilePicture />
   </MDBCardBody>
   {/* </div> */}
 </MDBCard>

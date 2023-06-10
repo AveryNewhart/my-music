@@ -8,11 +8,13 @@ const typeDefs = gql`
     username: String!
     email: String!
     password: String!
+    profilePicture: String
   }
   input CreateUserInput {
     email: String!
     username: String!
     password: String!
+    profilePicture: String
   }
   input DeleteUserInput {
     id: ID!
@@ -34,6 +36,7 @@ const typeDefs = gql`
     createUser(input: CreateUserInput!): Auth
     deleteUser(id: ID!, input: DeleteUserInput!): User
     loginUser(email: String!, password: String!): Auth
+    addProfilePicture(_id: ID!, profilePicture: String!): User!
   }
 `;
 

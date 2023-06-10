@@ -52,6 +52,13 @@ const resolvers = {
       }
     },
 
+    addProfilePicture: async (parent, { _id, profilePicture }) => {
+      const user = await User.findOne({ _id });
+      user.profilePicture = profilePicture;
+      await user.save();
+      return user;
+    },
+
     deleteUser: async (parent, { password }, { user }) => {
       // Check if user is logged in
       if (!user) {

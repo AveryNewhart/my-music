@@ -51,10 +51,12 @@ const SearchForm = () => {
       {result.map((album, index) => (
           <div key={index} className="albumInside">
             <p>Artist: {album.artistName}</p>
+            <img src={album.albumPic} alt="" className='coverArt'/>
             <p>Album: {album.albumName}</p>
             <p>Release Date: {album.releaseDate}</p>
-            <img src={album.albumPic} alt="" className='coverArt'/>
+            {/* <img src={album.albumPic} alt="" className='coverArt'/> */}
             {/* <image alt=''>{album.albumPic}</image> */}
+            <div>
             <button variant="primary" className="" 
             // onClick={() => handleSaveToWatched(movie.id)}
             >
@@ -62,6 +64,7 @@ const SearchForm = () => {
             <button variant="primary" className="" 
             // onClick={() => handleSaveToWatchlist(movie.id)}
             >Save to Wanna Listen</button>
+            </div>
           </div>
         ))}
       </div>

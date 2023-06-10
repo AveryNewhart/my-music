@@ -2,6 +2,7 @@ const express = require("express");
 const { ApolloServer } = require("apollo-server-express");
 const path = require("path");
 // const api = require('./api');
+const bodyParser = require('body-parser');
 
 const { authMiddleware } = require("./utils/auth");
 
@@ -10,6 +11,11 @@ const db = require("./config/connection");
 
 // const PORT = process.env.PORT || 3001;
 const app = express();
+
+// Increase the limit to 10MB
+app.use(bodyParser.json({ limit: '15mb' }));
+app.use(bodyParser.urlencoded({ limit: '15mb', extended: true }));
+
 const server = new ApolloServer({
   typeDefs,
   resolvers,

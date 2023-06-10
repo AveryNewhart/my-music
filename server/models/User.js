@@ -23,6 +23,10 @@ const UserSchema = new Schema({
     required: true,
     minlength: 6,
   },
+  profilePicture: {
+    type: String,
+    default: "https://villagesonmacarthur.com/wp-content/uploads/2020/12/Blank-Avatar.png"
+  },
 });
 
 UserSchema.pre("save", async function (next) {
