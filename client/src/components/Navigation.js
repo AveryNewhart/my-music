@@ -30,7 +30,7 @@ export default function Navigation() {
         setSearchResults(results);
         // Handle the search results here or redirect to the appropriate page
         console.log(results);
-        // window.location.assign('/searchedresults');
+        window.location.assign('/searchedresults');
       };
     
     return(
