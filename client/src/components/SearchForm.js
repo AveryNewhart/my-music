@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 // import { searchAlbums } from '...server/api'; // Update the import statement to match your file path
+
 import { searchAlbums } from '../api/api';
 import "../styles/SearchForm.css"
 
 
-const SearchForm = () => {
+const SearchForm = ({ onSearch }) => {
   const [searchTerm, setSearchTerm] = useState('');
-  const [result, setResult] = useState([]);
+  // const [result, setResult] = useState([]);
 
   // const handleSearch = () => {
   //   fetch(`/api/albums?searchTerm=${encodeURIComponent(searchTerm)}`)
@@ -19,56 +20,34 @@ const SearchForm = () => {
       const albums = await searchAlbums(searchTerm);
       console.log(albums); // Add this line to check the value
         // Extract the required information from the albums object
-        const albumData = albums.map(album => ({
+        const searchResults = albums.map(album => ({
           artistName: album.strArtist,
           albumName: album.strAlbum,
           releaseDate: album.intYearReleased,
           albumPic: album.strAlbumThumb
         }));
   
-        setResult(albumData);
-
-
+        // setResult(albumData);
+        onSearch(searchResults); // Pass the search results to the onSearch function
+        setSearchTerm('')
+        // window.location.href = '/searchedresults'
 
       // const albumDetails = `Title: ${albumTitle}\nArtist: ${artistName}\nYear Released: ${yearReleased}`;
       // setResult(albums);
     } catch (error) {
       console.error(error);
-      setResult('Error retrieving album data.');
+      // setResult('Error retrieving album data.');
     }
   };
 
   return (
     <div>
-      <input
+            <input
         type="text"
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
       />
       <button onClick={handleSearch}>Search</button>
-      {/* <div>{result}</div> */}
-      <div className='albumMain'>
-      {result.map((album, index) => (
-          <div key={index} className="albumInside">
-            <p>Artist: {album.artistName}</p>
-            <img src={album.albumPic} alt="" className='coverArt'/>
-            <p>Album: {album.albumName}</p>
-            <p>Release Date: {album.releaseDate}</p>
-            {/* <img src={album.albumPic} alt="" className='coverArt'/> */}
-            {/* <image alt=''>{album.albumPic}</image> */}
-            <div>
-            <button variant="primary" className="" 
-            // onClick={() => handleSaveToWatched(movie.id)}
-            >
-              Save to Listened</button>
-            <button variant="primary" className="" 
-            // onClick={() => handleSaveToWatchlist(movie.id)}
-            >Save to Wanna Listen</button>
-            </div>
-            <button className='reviewBtn'>Add Review</button>
-          </div>
-        ))}
-      </div>
     </div>
   );
 };

@@ -1,7 +1,7 @@
 import React from 'react'
 import Navigation from "../components/Navigation.js";
 import UserCard from '../components/UserCard.js';
-import SearchForm from '../components/SearchForm.js';
+// import SearchForm from '../components/SearchForm.js';
 // import ProfilePicture from '../components/ProfilePicture';
 // import Userfront from "@userfront/core";
 // import {  Alert } from "react-bootstrap";
@@ -20,9 +20,9 @@ const Profile = () => {
     <div className=''>
       <UserCard />
     </div>
-      <div>
+      {/* <div>
         <SearchForm />
-      </div>
+      </div> */}
   </div>
     );
   }

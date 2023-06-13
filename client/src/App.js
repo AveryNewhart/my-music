@@ -16,6 +16,7 @@ import Login from './pages/Login';
 import Profile from './pages/Profile';
 import Feed from './pages/Feed';
 import Signup from './pages/Signup';
+import SearchResultsPage from './pages/SearchResultsPage';
 // import EditProfile from "./pages/EditProfile";
 
 
@@ -70,6 +71,10 @@ function App() {
                           <Route 
                 path="/signup"
                 element={<Signup />}
+              />
+                                        <Route 
+                path="/searchedresults"
+                element={<SearchResultsPage />}
               />
             </Routes>
             {/* <Route path="/editprofile/:profileId" element={<EditProfile />} /> */}
