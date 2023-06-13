@@ -13,39 +13,26 @@ export default function Navigation() {
         window.location.href = '/';
     }
 
-    // const handleSearchResults = (searchResults) => {
-    //     // Handle the search results
-    //     history.push('/search-results', { searchResults });
-    //     console.log(searchResults);
-    //     // Redirect or perform other actions based on the search results
-    //   }
     const [searchResults, setSearchResults] = useState([]);
-
-    // const handleSearchResults = (searchResultsData) => {
-    //   setSearchResults(searchResultsData);
-    //   window.location.assign('/searchedresults');
-    // };
 
     const handleSearchResults = (results) => {
         setSearchResults(results);
         // Handle the search results here or redirect to the appropriate page
         console.log(results);
-        window.location.assign('/searchedresults');
+     
+  const queryString = new URLSearchParams({ searchResults: JSON.stringify(results) }).toString();
+
+  // Redirect to the searched results page with the query string as parameters
+  window.location.href = `/searchedresults?${queryString}`;
       };
     
     return(
         <>
             <Navbar collapseOnSelect fixed='top' expand='sm' className="back-nav">
                 <h1 className="header-head">My Music</h1>
-                {/* <SearchForm 
-                onSearch={handleSearchResults} 
-                /> */}
-                   {/* Your navigation component JSX */}
-      <SearchForm onSearch={handleSearchResults} albums={searchResults} />
-      {/* {searchResults.length > 0 && (
-        <SearchResultsPage results={searchResults} />
- 
-      )} */}
+      <SearchForm onSearch={handleSearchResults} 
+      albums={searchResults} 
+      />
                 <Container>
                     <Navbar.Toggle aria-controls='responsive-navbar-nav' className='container-pos'/>
                     <Navbar.Collapse id='responsive-navbar-nav'>

@@ -1,20 +1,15 @@
-import React
-// , { useState
-from 'react';
+import React from 'react';
 import Navigation from "../components/Navigation.js";
-// import SearchForm from './SearchForm';
-// import SearchResultsComp from '../components/SearchResultsComp';
+import "../styles/SearchForm.css"
 
-const SearchResultsPage = ({ albums }) => {
-//   const [searchResults, setSearchResults] = useState([]);
 
-//   const handleSearchResults = (results) => {
-//     setSearchResults(results);
+const SearchResultsPage = () => {
+    // Retrieve the search results from the query parameters
+  const searchResults = JSON.parse(new URLSearchParams(window.location.search).get('searchResults'));
 
-// const { searchResults } = location.state;
-console.log(albums)
+console.log(searchResults)
 
-if (!albums || albums.length === 0) {
+if (!searchResults || searchResults.length === 0) {
     return (
       <>
         <Navigation />
@@ -23,25 +18,27 @@ if (!albums || albums.length === 0) {
     );
   }
 
-//   };
-// if (!results) {
-//     return <p>No Results Found.</p>
-//   }
-
-// console.log(results)
-// console.log(result)
-
   return (
     <div>
       <Navigation />
           <h1>Search Results</h1>
-      {albums.map((album) => (
-        <div key={album.id} >
-          <p>Artist: {album.artistName}</p>
-          <img src={album.albumPic} alt="" className='coverArt' />
-          <p>Album: {album.albumName}</p>
-          <p>Release Date: {album.releaseDate}</p>
-        </div>
+      {searchResults.map((album, index) => (
+     <div key={index} className="albumInside">
+     <p>Artist: {album.artistName}</p>
+     <img src={album.albumPic} alt="" className='coverArt'/>
+     <p>Album: {album.albumName}</p>
+     <p>Release Date: {album.releaseDate}</p>
+     <div>
+     <button variant="primary" className="" 
+     // onClick={() => handleSaveToWatched(movie.id)}
+     >
+       Save to Listened</button>
+     <button variant="primary" className="" 
+     // onClick={() => handleSaveToWatchlist(movie.id)}
+     >Save to Wanna Listen</button>
+     </div>
+     <button className='reviewBtn'>Add Review</button>
+   </div>
       ))}
     </div>
   );

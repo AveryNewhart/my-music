@@ -7,14 +7,7 @@ import "../styles/SearchForm.css"
 
 const SearchForm = ({ onSearch }) => {
   const [searchTerm, setSearchTerm] = useState('');
-  // const [result, setResult] = useState([]);
 
-  // const handleSearch = () => {
-  //   fetch(`/api/albums?searchTerm=${encodeURIComponent(searchTerm)}`)
-  //     .then((response) => response.text())
-  //     .then((data) => setResult(data))
-  //     .catch((error) => console.error(error));
-  // };
   const handleSearch = async () => {
     try {
       const albums = await searchAlbums(searchTerm);
@@ -30,10 +23,6 @@ const SearchForm = ({ onSearch }) => {
         // setResult(albumData);
         onSearch(searchResults); // Pass the search results to the onSearch function
         setSearchTerm('')
-        // window.location.href = '/searchedresults'
-
-      // const albumDetails = `Title: ${albumTitle}\nArtist: ${artistName}\nYear Released: ${yearReleased}`;
-      // setResult(albums);
     } catch (error) {
       console.error(error);
       // setResult('Error retrieving album data.');
