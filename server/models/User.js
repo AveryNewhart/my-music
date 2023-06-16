@@ -29,13 +29,13 @@ const UserSchema = new Schema({
   },
     // New fields for album categories
     listenedAlbums: [{
-      title: { type: String },
+      albumName: { type: String },
       artistName: { type: String },
       albumPic: { type: String },
       releaseDate: { type: String }
     }],
     wannaListenAlbums: [{
-      title: { type: String },
+      albumName: { type: String },
       artistName: { type: String },
       albumPic: { type: String },
       releaseDate: { type: String }

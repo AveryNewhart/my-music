@@ -27,25 +27,37 @@ if (!searchResults || searchResults.length === 0) {
 
   const handleSaveToListened = async (album) => {
     //! WITH THIS CODE THE FETCH REQUEST PASSES BUT THE NEEDED DATA ISNT BEING RETURNED
-    try {
-        await saveToListened({ variables: { albumId: album.id } });
-        console.log('Album saved to "Listened".');
-      } catch (error) {
-        console.error('Error saving album to "Listened":', error);
-      }
-
-    //! WITH THIS CODE THE PAYLOAD RETURNS THE NEEDED DATA BUT THE FETCH FAILS
     // try {
-    //     await saveToListened({ variables: { albumId } });
+    //     await saveToListened({ variables: { albumId: album.id } });
     //     console.log('Album saved to "Listened".');
     //   } catch (error) {
     //     console.error('Error saving album to "Listened":', error);
     //   }
+
+    // const albumId = {
+    //     artistName: album.artistName,
+    //     albumName: album.albumName,
+    //     releaseDate: album.releaseDate,
+    //   };
+
+    //! WITH THIS CODE THE PAYLOAD RETURNS THE NEEDED DATA BUT THE FETCH FAILS
+    try {
+        await saveToListened({ variables: { albumId: album } });
+        console.log('Album saved to "Listened".');
+      } catch (error) {
+        console.error('Error saving album to "Listened":', error);
+      }
   };
 
-  const handleSaveToWannaListen = async (albumId) => {
+  const handleSaveToWannaListen = async (album) => {
+    const albumId = {
+        artistName: album.artistName,
+        albumName: album.albumName,
+        releaseDate: album.releaseDate,
+      };
+
     try {
-        await saveToWannaListen({ variables: { albumId: albumId} });
+        await saveToWannaListen({ variables: { albumId } });
         console.log('Album saved to "Wanna Listen".');
       } catch (error) {
         console.error('Error saving album to "Wanna Listen":', error);

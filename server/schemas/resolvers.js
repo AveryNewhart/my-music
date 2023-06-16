@@ -117,19 +117,24 @@ const resolvers = {
       // ).populate("listenedAlbums");
     
       // return user;
+      const { id, albumName, artist, albumPic, releaseDate } = albumId;
       
-          const album = await Album.findById(albumId);
+      const album = await Album.findById(albumId);
       if (!album) {
         throw new Error("Album not found.");
       }
       if (context.user) {
-        return (updatedUser = await User.findOneAndUpdate(
+        const updatedUser = await User.findOneAndUpdate(
           { _id: context.user._id },
-          { $addToSet: { listenedAlbums: albumId } },
+          { $addToSet: { listenedAlbums: { albumName, artist, albumPic, releaseDate } } },
+          // { $addToSet: { listenedAlbums: albumId } },
           { new: true, runValidators: true }
-        ).populate("listenedAlbums"));
-      }
+        ).populate("listenedAlbums");
+
+        return updatedUser;
+
       throw new AuthenticationError("You need to be logged in!");
+        }
 
 
       // if (!user) {

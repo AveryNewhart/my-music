@@ -34,8 +34,8 @@ query protected {
     profilePicture
     listenedAlbums {
         id
-        title
-        artist
+        albumName
+        artistName
         albumPic
         releaseDate
         # Add any additional fields you need from the listenedAlbums
@@ -43,8 +43,8 @@ query protected {
       }
       wannaListenAlbums {
         id
-        title
-        artist
+        albumName
+        artistName
         albumPic
         releaseDate
         # Add any additional fields you need from the wannaListenAlbums

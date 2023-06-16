@@ -64,7 +64,7 @@ export const ADD_PROFILE_PICTURE = gql`
 
 // Define the mutation for saving to "Watched" list
 export const SAVE_TO_LISTENED = gql`
-  mutation saveToListened($albumId: ID) {
+  mutation saveToListened($albumId: AlbumInput) {
     saveToListened(albumId: $albumId) {
       # // Return any data you need after saving to "Watched"
       # // For example, you can return the updated user or album data
@@ -74,8 +74,8 @@ export const SAVE_TO_LISTENED = gql`
       listenedAlbums {
         # // Include the fields you need
         id
+        artistName
         albumName
-        artist
         albumPic
         releaseDate
       }
@@ -85,7 +85,7 @@ export const SAVE_TO_LISTENED = gql`
 
 // Define the mutation for saving to "Wanna Listen" list
 export const SAVE_TO_WANNA_LISTEN = gql`
-  mutation SaveToWannaListen($albumId: ID) {
+  mutation SaveToWannaListen($albumId: AlbumInput) {
     saveToWannaListen(albumId: $albumId) {
       # // Return any data you need after saving to "Wanna Listen"
       # // For example, you can return the updated user or album data
@@ -95,8 +95,8 @@ export const SAVE_TO_WANNA_LISTEN = gql`
       wannaListenAlbums {
         # // Include the fields you need
         id
+        artistName
         albumName
-        artist
         albumPic
         releaseDate
       }

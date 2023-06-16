@@ -15,16 +15,16 @@ const typeDefs = gql`
 
   type Album {
     id: ID
+    artistName: String
     albumName: String
-    artist: String
     albumPic: String
     releaseDate: String
   }
 
   input AlbumInput {
     id: ID
+    artistName: String
     albumName: String
-    artist: String
     albumPic: String
     releaseDate: String
   }
@@ -58,7 +58,7 @@ const typeDefs = gql`
     loginUser(email: String!, password: String!): Auth
     addProfilePicture(_id: ID!, profilePicture: String!): User!
     # addReview(albumId: ID!, reviewText: String!): Album
-    saveToListened(albumId: ID): User
+    saveToListened(albumId: AlbumInput): User
     saveToWannaListen(albumId: ID): User
   }
 `;
