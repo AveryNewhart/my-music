@@ -7,25 +7,20 @@ query user($username: String!) {
     username
     email
     profilePicture
-    savedMusic {
-        musicId
+    listenedAlbums {
+        id
+        title
         artist
-        albumName
-        songName
+        albumPic
         releaseDate
-        genre
-    }
-    reviews {
-      reviewId
-      reviewText
-      reviewAuthor
-      createdAt
-      musicTitle {
-        artist
-        albumName
-        songName
       }
-    }
+      wannaListenAlbums {
+        id
+        title
+        artist
+        albumPic
+        releaseDate
+      }
   }
 }
 `;
@@ -37,25 +32,24 @@ query protected {
     username
     email
     profilePicture
-    # savedMusic {
-    #     musicId
-    #     artist
-    #     albumName
-    #     songName
-    #     releaseDate
-    #     genre
-    # }
-    # reviews {
-    #   reviewId
-    #   reviewText
-    #   reviewAuthor
-    #   musicTitle {
-    #     artist
-    #     albumName
-    #     songName
-    #   }
-    # }
-
+    listenedAlbums {
+        id
+        title
+        artist
+        albumPic
+        releaseDate
+        # Add any additional fields you need from the listenedAlbums
+        # ...
+      }
+      wannaListenAlbums {
+        id
+        title
+        artist
+        albumPic
+        releaseDate
+        # Add any additional fields you need from the wannaListenAlbums
+        # ...
+      }
   }
 }
 `;

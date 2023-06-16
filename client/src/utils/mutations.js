@@ -61,3 +61,45 @@ export const ADD_PROFILE_PICTURE = gql`
     }
   }
 `;
+
+// Define the mutation for saving to "Watched" list
+export const SAVE_TO_LISTENED = gql`
+  mutation saveToListened($albumId: ID) {
+    saveToListened(albumId: $albumId) {
+      # // Return any data you need after saving to "Watched"
+      # // For example, you can return the updated user or album data
+      # // Here we assume the mutation returns the updated user
+      username
+      id
+      listenedAlbums {
+        # // Include the fields you need
+        id
+        albumName
+        artist
+        albumPic
+        releaseDate
+      }
+    }
+  }
+`;
+
+// Define the mutation for saving to "Wanna Listen" list
+export const SAVE_TO_WANNA_LISTEN = gql`
+  mutation SaveToWannaListen($albumId: ID) {
+    saveToWannaListen(albumId: $albumId) {
+      # // Return any data you need after saving to "Wanna Listen"
+      # // For example, you can return the updated user or album data
+      # // Here we assume the mutation returns the updated user
+      username
+      id
+      wannaListenAlbums {
+        # // Include the fields you need
+        id
+        albumName
+        artist
+        albumPic
+        releaseDate
+      }
+    }
+  }
+`;

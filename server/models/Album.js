@@ -5,25 +5,26 @@
 
 const { Schema, model } = require("mongoose")
 
-const musicSchema = new Schema({
-    musicId: {
-        type: String,
-    },
-    artist: {
-        type: String,
-    },
-    releaseDate: {
+const albumSchema = new Schema({
+    id: {
         type: String,
     },
     albumName: {
         type: String,
     },
-    songName: {
+    artist: {
         type: String,
     },
-    genre: {
+    albumPic: {
+        type: String,
+    },
+    releaseDate: {
         type: String,
     },
 })
 
-module.exports = musicSchema
+const Album = model("Album", albumSchema);
+
+module.exports = Album;
+
+// module.exports = albumSchema

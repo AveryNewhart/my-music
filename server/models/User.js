@@ -27,6 +27,19 @@ const UserSchema = new Schema({
     type: String,
     default: "https://villagesonmacarthur.com/wp-content/uploads/2020/12/Blank-Avatar.png"
   },
+    // New fields for album categories
+    listenedAlbums: [{
+      title: { type: String },
+      artistName: { type: String },
+      albumPic: { type: String },
+      releaseDate: { type: String }
+    }],
+    wannaListenAlbums: [{
+      title: { type: String },
+      artistName: { type: String },
+      albumPic: { type: String },
+      releaseDate: { type: String }
+    }],  
 });
 
 UserSchema.pre("save", async function (next) {

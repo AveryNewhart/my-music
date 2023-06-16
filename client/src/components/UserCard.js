@@ -51,7 +51,30 @@ const UserCard = () => {
     <MDBCardText className='usernameArea'>
     {user.username || 'User Name'}
     </MDBCardText>
-              <ProfilePicture />
+          <ProfilePicture />
+        <div className="section">
+          <h3>Listened Albums</h3>
+          {user.listenedAlbums.map((album) => (
+            <div key={album.id} className="album">
+              <img src={album.albumPic} alt="" className="coverArt" />
+              <p>Artist: {album.artist}</p>
+              <p>Album: {album.title}</p>
+              <p>Release Date: {album.releaseDate}</p>
+            </div>
+          ))}
+        </div>
+
+        <div className="section">
+          <h3>Wanna Listen Albums</h3>
+          {user.wannaListenAlbums.map((album) => (
+            <div key={album.id} className="album">
+              <img src={album.albumPic} alt="" className="coverArt" />
+              <p>Artist: {album.artist}</p>
+              <p>Album: {album.title}</p>
+              <p>Release Date: {album.releaseDate}</p>
+            </div>
+          ))}
+        </div>
   </MDBCardBody>
   {/* </div> */}
 </MDBCard>

@@ -2,7 +2,7 @@
 
 const { AuthenticationError } = require("apollo-server-express");
 const { signToken } = require("../utils/auth");
-const { User } = require("../models"); //we don't need to do the dataSource at all if we import all the models
+const { User, Album } = require("../models"); //we don't need to do the dataSource at all if we import all the models
 // const { ObjectId } = require("mongodb"); //! for review as of now
 
 const resolvers = {
@@ -12,6 +12,10 @@ const resolvers = {
     },
     users: async (_, __, context) => {
       return await User.find();
+    },
+
+    album: async (_, { id }, context) => {
+      return await Album.getAlbumById(id);
     },
 
     protected: async (parent, args, context) => {
@@ -75,6 +79,73 @@ const resolvers = {
       console.log(deletedUser.username);
       return deletedUser;
     },
+
+    // addReview: async (parent, { albumId, reviewText }, { user }) => {
+    //   if (!user) {
+    //     throw new AuthenticationError("You need to be logged in to add a review.");
+    //   }
+
+    //   const album = await Album.findById(albumId);
+    //   if (!album) {
+    //     throw new Error("Album not found.");
+    //   }
+
+    //   const review = {
+    //     userId: user._id,
+    //     reviewText,
+    //   };
+
+    //   album.reviews.push(review);
+    //   await album.save();
+
+    //   return album;
+    // },
+    saveToListened: async (parent, { albumId }, context) => {
+      if (context.user) {
+        return (updatedUser = await User.findOneAndUpdate(
+          { _id: context.user._id },
+          { $addToSet: { listenedAlbums: albumId } },
+          { new: true, runValidators: true }
+        ).populate("listenedAlbums"));
+      }
+      throw new AuthenticationError("You need to be logged in!");
+      // if (!user) {
+      //   throw new AuthenticationError("You need to be logged in to save music.");
+      // }
+
+      // const album = await Album.findById(albumId);
+      // if (!album) {
+      //   throw new Error("Album not found.");
+      // }
+
+      // user.listenedAlbums.push(album);
+      // await user.save();
+
+      // return user;
+    },
+    saveToWannaListen: async (parent, { albumId }, { user }) => {
+      // if (context.user) {
+      //   return (updatedUser = await User.findOneAndUpdate(
+      //     { _id: context.user._id },
+      //     { $addToSet: { watchedMovies: movie } },
+      //     { new: true, runValidators: true }
+      //   ).populate("watchedMovies"));
+      // }
+      // throw new AuthenticationError("You need to be logged in!");
+      if (!user) {
+        throw new AuthenticationError("You need to be logged in to save music.");
+      }
+
+      const album = await Album.findById(albumId);
+      if (!album) {
+        throw new Error("Album not found.");
+      }
+
+      user.wannaListenAlbums.push(album);
+      await user.save();
+
+      return user;
+    },  
   },
 };
 module.exports = resolvers;

@@ -4,12 +4,31 @@ const { gql } = require("apollo-server-express");
 
 const typeDefs = gql`
   type User {
-    id: ID!
+    id: ID
     username: String!
     email: String!
     password: String!
     profilePicture: String
+    listenedAlbums: [Album]
+    wannaListenAlbums: [Album]
   }
+
+  type Album {
+    id: ID
+    albumName: String
+    artist: String
+    albumPic: String
+    releaseDate: String
+  }
+
+  input AlbumInput {
+    id: ID
+    albumName: String
+    artist: String
+    albumPic: String
+    releaseDate: String
+  }
+
   input CreateUserInput {
     email: String!
     username: String!
@@ -28,6 +47,7 @@ const typeDefs = gql`
     user(username: String!): User 
     users: [User]
     protected: User
+    album(id: ID!): Album
   }
 
 #!! //! make sure to add the mutations for adding reviews, saving music, etc.
@@ -37,6 +57,9 @@ const typeDefs = gql`
     deleteUser(id: ID!, input: DeleteUserInput!): User
     loginUser(email: String!, password: String!): Auth
     addProfilePicture(_id: ID!, profilePicture: String!): User!
+    # addReview(albumId: ID!, reviewText: String!): Album
+    saveToListened(albumId: ID): User
+    saveToWannaListen(albumId: ID): User
   }
 `;
 
