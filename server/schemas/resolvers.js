@@ -2,6 +2,8 @@
 
 const { AuthenticationError } = require("apollo-server-express");
 const { signToken } = require("../utils/auth");
+// import mongoose from "mongoose";
+const mongoose = require("mongoose");
 const { User, Album } = require("../models"); //we don't need to do the dataSource at all if we import all the models
 // const { ObjectId } = require("mongodb"); //! for review as of now
 
@@ -100,57 +102,23 @@ const resolvers = {
 
     //   return album;
     // },
-    saveToListened: async (parent, { albumId }, context) => {
-      // if (!context.user) {
-      //   throw new AuthenticationError("You need to be logged in to save music.");
-      // }
-    
-      // const album = await Album.findById(albumId);
-      // if (!album) {
-      //   throw new Error("Album not found.");
-      // }
-    
-      // const user = await User.findOneAndUpdate(
-      //   { _id: context.user._id },
-      //   { $addToSet: { listenedAlbums: albumId } },
-      //   { new: true, runValidators: true }
-      // ).populate("listenedAlbums");
-    
-      // return user;
-      const { id, albumName, artist, albumPic, releaseDate } = albumId;
-      
-      const album = await Album.findById(albumId);
-      if (!album) {
-        throw new Error("Album not found.");
-      }
-      if (context.user) {
+    saveToListened: async (parent, { album }, context) => {
+        // Generate a new ID for the album
+        if (!context.user) {
+          throw new AuthenticationError("You need to be logged in to save music.");
+        }
+
+  const albumWithId = { ...album, id: new mongoose.Types.ObjectId() };
+
+  const savedAlbum = await Album.create(albumWithId);
         const updatedUser = await User.findOneAndUpdate(
           { _id: context.user._id },
-          { $addToSet: { listenedAlbums: { albumName, artist, albumPic, releaseDate } } },
-          // { $addToSet: { listenedAlbums: albumId } },
+          { $addToSet: { listenedAlbums: savedAlbum } },
           { new: true, runValidators: true }
         ).populate("listenedAlbums");
 
         return updatedUser;
-
-      throw new AuthenticationError("You need to be logged in!");
-        }
-
-
-      // if (!user) {
-      //   throw new AuthenticationError("You need to be logged in to save music.");
-      // }
-
-      // const album = await Album.findById(albumId);
-      // if (!album) {
-      //   throw new Error("Album not found.");
-      // }
-
-      // user.listenedAlbums.push(album);
-      // await user.save();
-
-      // return user;
-    },
+        },
     saveToWannaListen: async (parent, { albumId }, { user }) => {
       // if (context.user) {
       //   return (updatedUser = await User.findOneAndUpdate(

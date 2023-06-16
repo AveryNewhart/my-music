@@ -26,23 +26,18 @@ if (!searchResults || searchResults.length === 0) {
   }
 
   const handleSaveToListened = async (album) => {
-    //! WITH THIS CODE THE FETCH REQUEST PASSES BUT THE NEEDED DATA ISNT BEING RETURNED
-    // try {
-    //     await saveToListened({ variables: { albumId: album.id } });
-    //     console.log('Album saved to "Listened".');
-    //   } catch (error) {
-    //     console.error('Error saving album to "Listened":', error);
-    //   }
 
-    // const albumId = {
-    //     artistName: album.artistName,
-    //     albumName: album.albumName,
-    //     releaseDate: album.releaseDate,
-    //   };
-
-    //! WITH THIS CODE THE PAYLOAD RETURNS THE NEEDED DATA BUT THE FETCH FAILS
     try {
-        await saveToListened({ variables: { albumId: album } });
+        await saveToListened({
+          variables: {
+            album: {
+              artistName: album.artistName,
+              albumName: album.albumName,
+              releaseDate: album.releaseDate,
+            }
+          }
+        });
+    
         console.log('Album saved to "Listened".');
       } catch (error) {
         console.error('Error saving album to "Listened":', error);

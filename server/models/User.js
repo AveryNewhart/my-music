@@ -1,5 +1,6 @@
 const { model, Schema } = require("mongoose");
 const bcrypt = require("bcrypt");
+// const albumSchema = require('./Album')
 //! call in and reference the music and review models to be associated with the user model.
 
 const UserSchema = new Schema({
@@ -29,12 +30,14 @@ const UserSchema = new Schema({
   },
     // New fields for album categories
     listenedAlbums: [{
+      id: { type: String },
       albumName: { type: String },
       artistName: { type: String },
       albumPic: { type: String },
       releaseDate: { type: String }
     }],
     wannaListenAlbums: [{
+      id: { type: String },
       albumName: { type: String },
       artistName: { type: String },
       albumPic: { type: String },

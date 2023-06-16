@@ -58,7 +58,7 @@ const typeDefs = gql`
     loginUser(email: String!, password: String!): Auth
     addProfilePicture(_id: ID!, profilePicture: String!): User!
     # addReview(albumId: ID!, reviewText: String!): Album
-    saveToListened(albumId: AlbumInput): User
+    saveToListened(album: AlbumInput): User
     saveToWannaListen(albumId: ID): User
   }
 `;

@@ -64,8 +64,8 @@ export const ADD_PROFILE_PICTURE = gql`
 
 // Define the mutation for saving to "Watched" list
 export const SAVE_TO_LISTENED = gql`
-  mutation saveToListened($albumId: AlbumInput) {
-    saveToListened(albumId: $albumId) {
+  mutation saveToListened($album: AlbumInput) {
+    saveToListened(album: $album) {
       # // Return any data you need after saving to "Watched"
       # // For example, you can return the updated user or album data
       # // Here we assume the mutation returns the updated user
