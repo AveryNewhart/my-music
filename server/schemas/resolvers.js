@@ -101,6 +101,27 @@ const resolvers = {
     //   return album;
     // },
     saveToListened: async (parent, { albumId }, context) => {
+      // if (!context.user) {
+      //   throw new AuthenticationError("You need to be logged in to save music.");
+      // }
+    
+      // const album = await Album.findById(albumId);
+      // if (!album) {
+      //   throw new Error("Album not found.");
+      // }
+    
+      // const user = await User.findOneAndUpdate(
+      //   { _id: context.user._id },
+      //   { $addToSet: { listenedAlbums: albumId } },
+      //   { new: true, runValidators: true }
+      // ).populate("listenedAlbums");
+    
+      // return user;
+      
+          const album = await Album.findById(albumId);
+      if (!album) {
+        throw new Error("Album not found.");
+      }
       if (context.user) {
         return (updatedUser = await User.findOneAndUpdate(
           { _id: context.user._id },
@@ -109,6 +130,8 @@ const resolvers = {
         ).populate("listenedAlbums"));
       }
       throw new AuthenticationError("You need to be logged in!");
+
+
       // if (!user) {
       //   throw new AuthenticationError("You need to be logged in to save music.");
       // }
