@@ -57,8 +57,8 @@ const UserCard = () => {
           {user.listenedAlbums.map((album) => (
             <div key={album.id} className="album">
               <img src={album.albumPic} alt="" className="coverArt" />
-              <p>Artist: {album.artist}</p>
-              <p>Album: {album.title}</p>
+              <p>Artist: {album.artistName}</p>
+              <p>Album: {album.albumName}</p>
               <p>Release Date: {album.releaseDate}</p>
             </div>
           ))}
@@ -69,8 +69,8 @@ const UserCard = () => {
           {user.wannaListenAlbums.map((album) => (
             <div key={album.id} className="album">
               <img src={album.albumPic} alt="" className="coverArt" />
-              <p>Artist: {album.artist}</p>
-              <p>Album: {album.title}</p>
+              <p>Artist: {album.artistName}</p>
+              <p>Album: {album.albumName}</p>
               <p>Release Date: {album.releaseDate}</p>
             </div>
           ))}
