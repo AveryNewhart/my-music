@@ -34,6 +34,7 @@ if (!searchResults || searchResults.length === 0) {
               artistName: album.artistName,
               albumName: album.albumName,
               releaseDate: album.releaseDate,
+              albumPic: album.albumPic,
             }
           }
         });
@@ -45,14 +46,16 @@ if (!searchResults || searchResults.length === 0) {
   };
 
   const handleSaveToWannaListen = async (album) => {
-    const albumId = {
-        artistName: album.artistName,
-        albumName: album.albumName,
-        releaseDate: album.releaseDate,
-      };
-
     try {
-        await saveToWannaListen({ variables: { albumId } });
+        await saveToWannaListen({ variables: {
+            album: {
+              artistName: album.artistName,
+              albumName: album.albumName,
+              releaseDate: album.releaseDate,
+              albumPic: album.albumPic,
+            }
+          }
+        });
         console.log('Album saved to "Wanna Listen".');
       } catch (error) {
         console.error('Error saving album to "Wanna Listen":', error);

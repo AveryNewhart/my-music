@@ -85,8 +85,8 @@ export const SAVE_TO_LISTENED = gql`
 
 // Define the mutation for saving to "Wanna Listen" list
 export const SAVE_TO_WANNA_LISTEN = gql`
-  mutation SaveToWannaListen($albumId: AlbumInput) {
-    saveToWannaListen(albumId: $albumId) {
+  mutation SaveToWannaListen($album: AlbumInput) {
+    saveToWannaListen(album: $album) {
       # // Return any data you need after saving to "Wanna Listen"
       # // For example, you can return the updated user or album data
       # // Here we assume the mutation returns the updated user

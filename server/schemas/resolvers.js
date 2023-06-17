@@ -119,28 +119,22 @@ const resolvers = {
 
         return updatedUser;
         },
-    saveToWannaListen: async (parent, { albumId }, { user }) => {
-      // if (context.user) {
-      //   return (updatedUser = await User.findOneAndUpdate(
-      //     { _id: context.user._id },
-      //     { $addToSet: { watchedMovies: movie } },
-      //     { new: true, runValidators: true }
-      //   ).populate("watchedMovies"));
-      // }
-      // throw new AuthenticationError("You need to be logged in!");
-      if (!user) {
-        throw new AuthenticationError("You need to be logged in to save music.");
-      }
+    saveToWannaListen: async (parent, { album }, context) => {
+        // Generate a new ID for the album
+        if (!context.user) {
+          throw new AuthenticationError("You need to be logged in to save music.");
+        }
 
-      const album = await Album.findById(albumId);
-      if (!album) {
-        throw new Error("Album not found.");
-      }
+  const albumWithId = { ...album, id: new mongoose.Types.ObjectId() };
 
-      user.wannaListenAlbums.push(album);
-      await user.save();
+  const savedAlbum = await Album.create(albumWithId);
+        const updatedUser = await User.findOneAndUpdate(
+          { _id: context.user._id },
+          { $addToSet: { wannaListenAlbums: savedAlbum } },
+          { new: true, runValidators: true }
+        ).populate("wannaListenAlbums");
 
-      return user;
+        return updatedUser;
     },  
   },
 };
