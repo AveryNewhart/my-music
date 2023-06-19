@@ -4,7 +4,7 @@ const { AuthenticationError } = require("apollo-server-express");
 const { signToken } = require("../utils/auth");
 // import mongoose from "mongoose";
 const mongoose = require("mongoose");
-const { User, Album } = require("../models"); //we don't need to do the dataSource at all if we import all the models
+const { User, Album, Review } = require("../models"); //we don't need to do the dataSource at all if we import all the models
 // const { ObjectId } = require("mongodb"); //! for review as of now
 
 const resolvers = {
@@ -82,21 +82,23 @@ const resolvers = {
       return deletedUser;
     },
 
-    addReview: async (parent, { albumName, reviewText }, { user }) => {
-      if (!user) {
-        throw new AuthenticationError("You need to be logged in to add a review.");
-      }
-  
-      const review = {
-        albumName,
-        reviewText,
-      };
-  
-      user.reviews.push(review);
-      await user.save();
-  
-      return user;
-    },
+  addReview: async (parent, { input }, context) => {
+            // Generate a new ID for the album
+      if (!context.user) {
+              throw new AuthenticationError("You need to be logged in to save music.");
+            }
+    
+      const reviewWithId = { ...input, id: new mongoose.Types.ObjectId() };
+    
+      const savedReview = await Review.create(reviewWithId);
+            const updatedUser = await User.findOneAndUpdate(
+              { _id: context.user._id },
+              { $addToSet: { reviews: savedReview } },
+              { new: true, runValidators: true }
+            ).populate("reviews");
+    
+            return updatedUser;
+  },
 
     saveToListened: async (parent, { album }, context) => {
         // Generate a new ID for the album

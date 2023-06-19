@@ -31,13 +31,15 @@ const typeDefs = gql`
   }
 
   type Review {
+  id: ID
   albumName: String
   reviewText: String
 }
 
 input AddReviewInput {
-  albumName: String!
-  reviewText: String!
+  id: ID
+  albumName: String
+  reviewText: String
 }
 
   input CreateUserInput {
@@ -68,7 +70,7 @@ input AddReviewInput {
     deleteUser(id: ID!, input: DeleteUserInput!): User
     loginUser(email: String!, password: String!): Auth
     addProfilePicture(_id: ID!, profilePicture: String!): User!
-    addReview(input: AddReviewInput!): User
+    addReview(input: AddReviewInput): User
     saveToListened(album: AlbumInput): User
     saveToWannaListen(album: AlbumInput): User
   }

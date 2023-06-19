@@ -44,6 +44,7 @@ const UserSchema = new Schema({
       releaseDate: { type: String }
     }],
     reviews: [{
+      id: { type: String },
       albumName: { type: String },
       reviewText: { type: String },
     }],  

@@ -1,25 +1,25 @@
 //! reviews for music, each one will be associated with the music, so essentially this will be linked to the music model as well.
 
 const { model, Schema } = require("mongoose");
-const musicSchema = require('./Music')
+const Album = require('./Album')
 
 const reviewSchema = new Schema({
-  reviewId: {
+  id: {
     type: String,
   },
-  movieTitle: musicSchema,
-  reviewAuthor: {
+  albumName: {
     type: String,
+    ref: "Album",
   },
   reviewText: {
     type: String,
   },
-  createdAt: {
-    type: Date,
-    default: Date.now,
-  },
+  // user: {
+  //   type: Schema.Types.ObjectId,
+  //   ref: "User",
+  // },
 });
 
-// const Review = model("Review", reviewSchema);
+const Review = model("Review", reviewSchema);
 
-module.exports = reviewSchema;
+module.exports = Review;
