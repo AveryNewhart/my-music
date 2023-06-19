@@ -19,6 +19,9 @@ const resolvers = {
     album: async (_, { id }, context) => {
       return await Album.getAlbumById(id);
     },
+    reviews: async (_, { id }, context) => {
+      return await Review.getReviewById(id);
+    },
 
     protected: async (parent, args, context) => {
       //!Query defined in typeDef for authentication

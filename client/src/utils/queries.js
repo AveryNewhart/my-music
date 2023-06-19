@@ -50,6 +50,11 @@ query protected {
         # Add any additional fields you need from the wannaListenAlbums
         # ...
       }
+      reviews {
+        id
+        albumName
+        reviewText
+      }
   }
 }
 `;

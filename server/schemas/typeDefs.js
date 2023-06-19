@@ -61,6 +61,7 @@ input AddReviewInput {
     users: [User]
     protected: User
     album(id: ID!): Album
+    reviews(id: ID!): Review
   }
 
 #!! //! make sure to add the mutations for adding reviews, saving music, etc.

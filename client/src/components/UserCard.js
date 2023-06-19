@@ -75,6 +75,16 @@ const UserCard = () => {
             </div>
           ))}
         </div>
+
+        <div className="section">
+          <h3>Reviews</h3>
+          {user.reviews.map((review) => (
+            <div key={review.id} className="review">
+              <p>Album: {review.albumName}</p>
+              <p>Review: {review.reviewText}</p>
+            </div>
+          ))}
+        </div>
   </MDBCardBody>
   {/* </div> */}
 </MDBCard>
