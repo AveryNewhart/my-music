@@ -19,7 +19,7 @@
   text-align: center;
 }
 
-.modal {
+div.modal {
     position: fixed;
     top: 0;
     left: 0;
@@ -32,7 +32,7 @@
     z-index: 99; /* Add this line to ensure the modal is displayed above other content */
   }
   
-  .modal-content {
+  div.modal-content {
     background-color: white;
     padding: 20px;
   }
