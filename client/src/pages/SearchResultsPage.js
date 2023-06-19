@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import Navigation from "../components/Navigation.js";
 // import axios from 'axios';
 import { useMutation } from '@apollo/client';
-import { SAVE_TO_WANNA_LISTEN, SAVE_TO_LISTENED } from "../utils/mutations";
-import "../styles/SearchForm.css"
+import { SAVE_TO_WANNA_LISTEN, SAVE_TO_LISTENED, ADD_REVIEW } from "../utils/mutations";
+// import "../styles/SearchForm.css"
 import '../styles/SearchResultsPage.css'; // Add this line
 
 
@@ -11,9 +11,11 @@ const SearchResultsPage = () => {
 
 const [saveToListened] = useMutation(SAVE_TO_LISTENED);
 const [saveToWannaListen] = useMutation(SAVE_TO_WANNA_LISTEN);
+const [addReview] = useMutation(ADD_REVIEW);
 
 const [isModalOpen, setIsModalOpen] = useState(false);
 const [reviewText, setReviewText] = useState('');
+const [selectedAlbum, setSelectedAlbum] = useState(null);
 
 
     // Retrieve the search results from the query parameters
@@ -65,23 +67,41 @@ if (!searchResults || searchResults.length === 0) {
       } catch (error) {
         console.error('Error saving album to "Wanna Listen":', error);
       }
+  }; 
+
+  const handleAddReview = async (albumName, reviewText) => {
+    try {
+        await addReview({
+          variables: {
+            input: {
+              albumName,
+              reviewText
+            }
+          }
+        });
+      console.log('Review added successfully.');
+    } catch (error) {
+      console.error('Error adding review:', error);
+    }
   };
 
   const submitReview = () => {
-    // Perform any necessary actions with the review text
-    console.log('Review submitted:', reviewText);
-  
-    // Close the modal
-    closeModal();
-  };
+    if (selectedAlbum) {
+        handleAddReview(selectedAlbum.albumName, reviewText);
+        closeModal();
+      }
+    };
 
-  const openModal = () => {
+const openModal = (album) => {
+    console.log('Open modal called');
+    setSelectedAlbum(album);
     setIsModalOpen(true);
   };
   
   const closeModal = () => {
     setIsModalOpen(false);
     setReviewText('');
+    setSelectedAlbum(null);
   };
   
 
@@ -111,26 +131,27 @@ if (!searchResults || searchResults.length === 0) {
                   Save to Wanna Listen
                 </button>
               </div>
-              <button className="reviewBtn" onClick={openModal}>
+              <button className="reviewBtn"onClick={() => openModal(album)}>
                 Add Review
               </button>
             </div>
           ))}
-          {isModalOpen && (
-            <div className="modal">
-              <div className="modal-content">
-                <h2>Add Review</h2>
-                <textarea
-                  value={reviewText}
-                  onChange={(e) => setReviewText(e.target.value)}
-                  rows={4}
-                  cols={50}
-                />
-                <button onClick={submitReview}>Submit</button>
-                <button onClick={closeModal}>Cancel</button>
-              </div>
-            </div>
-          )}
+           {isModalOpen && selectedAlbum && (
+        <div className="modal">
+          <div className="modal-content">
+            <h2>Add Review For: {selectedAlbum.albumName}</h2>
+            <textarea
+              value={reviewText}
+              onChange={(e) => setReviewText(e.target.value)}
+              rows={4}
+              cols={50}
+              className="mTextArea"
+            />
+            <button className="mButtons" onClick={submitReview}>Submit</button>
+            <button className="mButtons" onClick={closeModal}>Cancel</button>
+          </div>
+        </div>
+      )}
         </div>
       );
           };

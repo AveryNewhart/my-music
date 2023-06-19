@@ -11,6 +11,7 @@ const typeDefs = gql`
     profilePicture: String
     listenedAlbums: [Album]
     wannaListenAlbums: [Album]
+    reviews: [Review]
   }
 
   type Album {
@@ -28,6 +29,16 @@ const typeDefs = gql`
     albumPic: String
     releaseDate: String
   }
+
+  type Review {
+  albumName: String
+  reviewText: String
+}
+
+input AddReviewInput {
+  albumName: String!
+  reviewText: String!
+}
 
   input CreateUserInput {
     email: String!
@@ -57,7 +68,7 @@ const typeDefs = gql`
     deleteUser(id: ID!, input: DeleteUserInput!): User
     loginUser(email: String!, password: String!): Auth
     addProfilePicture(_id: ID!, profilePicture: String!): User!
-    # addReview(albumId: ID!, reviewText: String!): Album
+    addReview(input: AddReviewInput!): User
     saveToListened(album: AlbumInput): User
     saveToWannaListen(album: AlbumInput): User
   }

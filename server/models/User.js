@@ -42,6 +42,10 @@ const UserSchema = new Schema({
       artistName: { type: String },
       albumPic: { type: String },
       releaseDate: { type: String }
+    }],
+    reviews: [{
+      albumName: { type: String },
+      reviewText: { type: String },
     }],  
 });
 

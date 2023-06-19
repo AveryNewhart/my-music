@@ -103,3 +103,17 @@ export const SAVE_TO_WANNA_LISTEN = gql`
     }
   }
 `;
+
+export const ADD_REVIEW = gql`
+  mutation addReview($input: AddReviewInput!) {
+    addReview(input: $input) {
+      username
+      id
+      reviews {
+        albumName
+        reviewText
+      }
+    }
+  }
+`;
+

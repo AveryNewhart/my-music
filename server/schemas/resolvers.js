@@ -82,26 +82,22 @@ const resolvers = {
       return deletedUser;
     },
 
-    // addReview: async (parent, { albumId, reviewText }, { user }) => {
-    //   if (!user) {
-    //     throw new AuthenticationError("You need to be logged in to add a review.");
-    //   }
+    addReview: async (parent, { albumName, reviewText }, { user }) => {
+      if (!user) {
+        throw new AuthenticationError("You need to be logged in to add a review.");
+      }
+  
+      const review = {
+        albumName,
+        reviewText,
+      };
+  
+      user.reviews.push(review);
+      await user.save();
+  
+      return user;
+    },
 
-    //   const album = await Album.findById(albumId);
-    //   if (!album) {
-    //     throw new Error("Album not found.");
-    //   }
-
-    //   const review = {
-    //     userId: user._id,
-    //     reviewText,
-    //   };
-
-    //   album.reviews.push(review);
-    //   await album.save();
-
-    //   return album;
-    // },
     saveToListened: async (parent, { album }, context) => {
         // Generate a new ID for the album
         if (!context.user) {
