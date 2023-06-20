@@ -1,6 +1,7 @@
 import React from 'react';
 import { useQuery } from '@apollo/client';
-import { QUERY_USERS } from '../utils/queries'; // Path to your query file
+import { QUERY_USERS } from '../utils/queries';
+import Navigation from "../components/Navigation.js";
 
 const Feed = () => {
   // Fetch the data using the QUERY_USERS query
@@ -18,6 +19,7 @@ const Feed = () => {
 
   return (
     <div>
+      <Navigation />
       <h1>Feed Page</h1>
       {users.map((user) => (
         <div key={user.id}>
