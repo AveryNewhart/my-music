@@ -9,21 +9,65 @@ query user($username: String!) {
     profilePicture
     listenedAlbums {
         id
-        title
-        artist
+        albumName
+        artistName
         albumPic
         releaseDate
+        # Add any additional fields you need from the listenedAlbums
+        # ...
       }
       wannaListenAlbums {
         id
-        title
-        artist
+        albumName
+        artistName
         albumPic
         releaseDate
+        # Add any additional fields you need from the wannaListenAlbums
+        # ...
+      }
+      reviews {
+        id
+        albumName
+        reviewText
       }
   }
 }
 `;
+
+export const QUERY_USERS = gql`
+  query {
+    users {
+      id
+      username
+      email
+      profilePicture
+      listenedAlbums {
+        id
+        albumName
+        artistName
+        albumPic
+        releaseDate
+        # Add any additional fields you need from the listenedAlbums
+        # ...
+      }
+      wannaListenAlbums {
+        id
+        albumName
+        artistName
+        albumPic
+        releaseDate
+        # Add any additional fields you need from the wannaListenAlbums
+        # ...
+      }
+      reviews {
+        id
+        albumName
+        reviewText
+      }
+    }
+  }
+`;
+
 
 export const QUERY_PROTECTED = gql`
 query protected {

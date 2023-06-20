@@ -1,29 +1,52 @@
-import React from 'react'
-// import Navigation from "../components/Nav.js";
-// import { useParams } from "react-router-dom";
-// import { useQuery } from '@apollo/client';
-// import { QUERY_PROTECTED } from "../utils/queries";
-// import Userfront from "@userfront/core";
-// import {  Alert } from "react-bootstrap";
-// import Auth from "../utils/auth";
+import React from 'react';
+import { useQuery } from '@apollo/client';
+import { QUERY_USERS } from '../utils/queries'; // Path to your query file
 
-import "../styles/App.css";
-import "../styles/Feed.css";
-
-
-
-// Define the Login form component
 const Feed = () => {
-    return (
-      <div>
-    <div>
-        <h1>feed page</h1>
-        <p>this page is goinbg to have reviews being posted there. All reviews will be visible here. Each review will have the name of the person associated with it so you can click on their profile to see their other reviews and their saved music. You will be able to like peoples reviews and also leave comments on the reviews too. </p>
-    </div>
-  </div>
-    );
+  // Fetch the data using the QUERY_USERS query
+  const { loading, error, data } = useQuery(QUERY_USERS);
+
+  if (loading) {
+    return <p>Loading...</p>;
   }
 
+  if (error) {
+    return <p>Error occurred: {error.message}</p>;
+  }
 
-// Render the login form
+  const users = data.users;
+
+  return (
+    <div>
+      <h1>Feed Page</h1>
+      {users.map((user) => (
+        <div key={user.id}>
+          <h2>{user.username}</h2>
+          <h3>Listened Albums:</h3>
+          <ul>
+            {user.listenedAlbums.map((album) => (
+              <li key={album.id}>{album.albumName}</li>
+            ))}
+          </ul>
+          <h3>Wanna Listen Albums:</h3>
+          <ul>
+            {user.wannaListenAlbums.map((album) => (
+              <li key={album.id}>{album.albumName}</li>
+            ))}
+          </ul>
+          <h3>Reviews:</h3>
+          <ul>
+            {user.reviews.map((review) => (
+              <li key={review.id}>
+                <strong>Album: </strong> {review.albumName}<br />
+                <strong>Review: </strong> {review.reviewText}
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
+  );
+};
+
 export default Feed;
