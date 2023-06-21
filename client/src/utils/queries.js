@@ -13,6 +13,7 @@ query user($username: String!) {
         artistName
         albumPic
         releaseDate
+        createdAt
         # Add any additional fields you need from the listenedAlbums
         # ...
       }
@@ -22,6 +23,7 @@ query user($username: String!) {
         artistName
         albumPic
         releaseDate
+        createdAt
         # Add any additional fields you need from the wannaListenAlbums
         # ...
       }
@@ -29,6 +31,7 @@ query user($username: String!) {
         id
         albumName
         reviewText
+        createdAt
       }
   }
 }
@@ -47,6 +50,7 @@ export const QUERY_USERS = gql`
         artistName
         albumPic
         releaseDate
+        createdAt
         # Add any additional fields you need from the listenedAlbums
         # ...
       }
@@ -56,6 +60,7 @@ export const QUERY_USERS = gql`
         artistName
         albumPic
         releaseDate
+        createdAt
         # Add any additional fields you need from the wannaListenAlbums
         # ...
       }
@@ -63,6 +68,7 @@ export const QUERY_USERS = gql`
         id
         albumName
         reviewText
+        createdAt
       }
     }
   }
