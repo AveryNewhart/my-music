@@ -21,6 +21,10 @@ const albumSchema = new Schema({
     releaseDate: {
         type: String,
     },
+    createdAt: {
+        type: Date,
+        default: Date.now,
+      },
 })
 
 const Album = model("Album", albumSchema);

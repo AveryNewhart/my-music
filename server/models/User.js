@@ -31,6 +31,7 @@ const UserSchema = new Schema({
     // New fields for album categories
     listenedAlbums: [{
       id: { type: String },
+      createdAt: {  type: Date, default: Date.now,},
       albumName: { type: String },
       artistName: { type: String },
       albumPic: { type: String },
@@ -38,6 +39,7 @@ const UserSchema = new Schema({
     }],
     wannaListenAlbums: [{
       id: { type: String },
+      createdAt: {  type: Date, default: Date.now,},
       albumName: { type: String },
       artistName: { type: String },
       albumPic: { type: String },
@@ -45,6 +47,7 @@ const UserSchema = new Schema({
     }],
     reviews: [{
       id: { type: String },
+      createdAt: {  type: Date, default: Date.now,},
       albumName: { type: String },
       reviewText: { type: String },
     }],  

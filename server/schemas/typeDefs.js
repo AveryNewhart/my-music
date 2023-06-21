@@ -1,7 +1,5 @@
 const { gql } = require("apollo-server-express");
 
-//! HAVE TO CREATE THE types AND inputs for music, reviews, saved music. 
-
 const typeDefs = gql`
   type User {
     id: ID
@@ -16,14 +14,7 @@ const typeDefs = gql`
 
   type Album {
     id: ID
-    artistName: String
-    albumName: String
-    albumPic: String
-    releaseDate: String
-  }
-
-  input AlbumInput {
-    id: ID
+    createdAt: String
     artistName: String
     albumName: String
     albumPic: String
@@ -31,16 +22,27 @@ const typeDefs = gql`
   }
 
   type Review {
-  id: ID
-  albumName: String
-  reviewText: String
-}
+    id: ID
+    createdAt: String
+    albumName: String
+    reviewText: String
+  }
 
-input AddReviewInput {
-  id: ID
-  albumName: String
-  reviewText: String
-}
+  input AlbumInput {
+    id: ID
+    createdAt: String
+    artistName: String
+    albumName: String
+    albumPic: String
+    releaseDate: String
+  }
+
+  input AddReviewInput {
+    id: ID
+    createdAt: String
+    albumName: String
+    reviewText: String
+  }
 
   input CreateUserInput {
     email: String!
@@ -48,14 +50,17 @@ input AddReviewInput {
     password: String!
     profilePicture: String
   }
+
   input DeleteUserInput {
     id: ID!
     password: String!
   }
+
   type Auth {
     token: ID!
     user: User
   }
+
   type Query {
     user(username: String!): User 
     users: [User]
@@ -63,8 +68,6 @@ input AddReviewInput {
     album(id: ID!): Album
     reviews(id: ID!): Review
   }
-
-#!! //! make sure to add the mutations for adding reviews, saving music, etc.
 
   type Mutation {
     createUser(input: CreateUserInput!): Auth
@@ -76,6 +79,5 @@ input AddReviewInput {
     saveToWannaListen(album: AlbumInput): User
   }
 `;
-
 
 module.exports = typeDefs;
