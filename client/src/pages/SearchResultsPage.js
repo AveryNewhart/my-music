@@ -5,6 +5,8 @@ import { useMutation } from '@apollo/client';
 import { SAVE_TO_WANNA_LISTEN, SAVE_TO_LISTENED, ADD_REVIEW } from "../utils/mutations";
 // import "../styles/SearchForm.css"
 import '../styles/SearchResultsPage.css'; // Add this line
+import AuthService from '../utils/auth'; // Import your authentication context or hook
+
 
 
 const SearchResultsPage = () => {
@@ -16,6 +18,11 @@ const [addReview] = useMutation(ADD_REVIEW);
 const [isModalOpen, setIsModalOpen] = useState(false);
 const [reviewText, setReviewText] = useState('');
 const [selectedAlbum, setSelectedAlbum] = useState(null);
+
+// const { user } = useAuth(); // Retrieve the logged-in user's information from the authentication context
+const user = AuthService.getUser(); // Retrieve the logged-in user's information from the AuthService
+console.log(user); // Add this line
+const username = user?.data?.username || user?.data?.email; // Use user.email or user.username based on the token payload structure
 
 
     // Retrieve the search results from the query parameters
@@ -69,13 +76,16 @@ if (!searchResults || searchResults.length === 0) {
       }
   }; 
 
-  const handleAddReview = async (albumName, reviewText) => {
+
+
+  const handleAddReview = async (albumName, reviewText, username) => {
     try {
         await addReview({
           variables: {
             input: {
               albumName,
               reviewText,
+              user: username,
             }
           }
         });
@@ -86,9 +96,13 @@ if (!searchResults || searchResults.length === 0) {
   };
 
   const submitReview = () => {
-    if (selectedAlbum) {
-        handleAddReview(selectedAlbum.albumName, reviewText);
-        closeModal();
+    // if (selectedAlbum) {
+    //     handleAddReview(selectedAlbum.albumName, reviewText);
+    //     closeModal();
+    if (selectedAlbum && user) {
+      // const username = user.username; // Assuming the user object has an "id" property
+      handleAddReview(selectedAlbum.albumName, reviewText, username);
+      closeModal();
       }
     };
 
