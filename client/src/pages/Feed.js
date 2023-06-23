@@ -34,8 +34,8 @@ const Feed = () => {
       <h1>Feed Page</h1>
       <ul>
         {sortedReviews.length > 0 ? (
-          sortedReviews.map((review) => (
-            <li key={review.id}>
+          sortedReviews.reverse().map((review, index) => (
+            <li key={index}>
               <h2>{review.username}</h2>
               <p>Album: {review.albumName}</p>
               <p>Review: {review.reviewText}</p>
