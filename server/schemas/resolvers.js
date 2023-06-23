@@ -97,9 +97,11 @@ const resolvers = {
               throw new AuthenticationError("You need to be logged in to save music.");
             }
     
-      const reviewWithId = { ...input, id: new mongoose.Types.ObjectId() };
+      // const reviewWithId = { ...input, id: new mongoose.Types.ObjectId() };
+      const reviewWithUsername = { ...input, username: context.user.username };
+      const savedReview = await Review.create(reviewWithUsername);
     
-      const savedReview = await Review.create(reviewWithId);
+      // const savedReview = await Review.create(reviewWithId);
             const updatedUser = await User.findOneAndUpdate(
               { _id: context.user._id },
               { $addToSet: { reviews: savedReview } },

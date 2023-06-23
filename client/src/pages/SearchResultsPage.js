@@ -78,14 +78,14 @@ if (!searchResults || searchResults.length === 0) {
 
 
 
-  const handleAddReview = async (albumName, reviewText, username) => {
+  const handleAddReview = async (albumName, reviewText) => {
     try {
         await addReview({
           variables: {
             input: {
               albumName,
               reviewText,
-              user: username,
+              // user: username,
             }
           }
         });

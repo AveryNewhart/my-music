@@ -50,6 +50,7 @@ const UserSchema = new Schema({
       createdAt: {  type: Date, default: Date.now,},
       albumName: { type: String },
       reviewText: { type: String },
+      username: { type: String },
     }],  
 });
 

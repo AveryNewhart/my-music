@@ -18,8 +18,8 @@ const reviewSchema = new Schema({
     type: Date,
     default: Date.now,
   },
-  user: {
-    type: Schema.Types.ObjectId,
+  username: {
+    type: String,
     ref: "User",
   },
 });

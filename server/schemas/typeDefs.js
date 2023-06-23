@@ -26,7 +26,7 @@ const typeDefs = gql`
     createdAt: String
     albumName: String
     reviewText: String
-    user: User
+    username: String
   }
 
   input AlbumInput {
@@ -43,7 +43,7 @@ const typeDefs = gql`
     createdAt: String
     albumName: String
     reviewText: String
-    userId: ID  # Add this field to associate the user with the review
+    username: String  # Add this field to associate the user with the review
   }
 
   input CreateUserInput {
