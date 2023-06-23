@@ -108,3 +108,15 @@ query protected {
   }
 }
 `;
+
+export const QUERY_REVIEWS = gql`
+  query {
+    reviews {
+      id
+      createdAt
+      albumName
+      reviewText
+      username
+    }
+  }
+`;

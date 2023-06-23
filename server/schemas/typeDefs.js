@@ -68,7 +68,8 @@ const typeDefs = gql`
     users: [User]
     protected: User
     album(id: ID!): Album
-    reviews(id: ID!): Review
+    # reviews(id: ID!): Review
+    reviews: [Review]  # Add this field to query all reviews
   }
 
   type Mutation {

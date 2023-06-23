@@ -1,11 +1,11 @@
 import React from 'react';
 import { useQuery } from '@apollo/client';
-import { QUERY_USERS } from '../utils/queries';
+import { QUERY_REVIEWS } from '../utils/queries';
 import Navigation from '../components/Navigation';
 
 const Feed = () => {
-  // Fetch the data using the QUERY_USERS query
-  const { loading, error, data } = useQuery(QUERY_USERS);
+  // Fetch the data using the QUERY_REVIEWS query
+  const { loading, error, data } = useQuery(QUERY_REVIEWS);
 
   if (loading) {
     return <p>Loading...</p>;
@@ -15,62 +15,120 @@ const Feed = () => {
     return <p>Error occurred: {error.message}</p>;
   }
 
-  const users = data.users;
+  console.log('data:', data);
 
-  // Create an array to store individual posts
-  const posts = [];
+  const reviews = data?.reviews ?? [];
+  console.log('reviews:', reviews);
 
-  // Iterate over users and their actions to create posts
-  users.forEach((user) => {
-    // const reviews = user.reviews;
-    const reviews = user.reviews.slice(); // Create a copy of the reviews array
-
-
-    if (reviews.length > 0) {
-      // Sort the reviews based on the createdAt property in descending order
-      reviews.sort((a, b) => {
-        const dateA = new Date(a.createdAt).getTime();
-        const dateB = new Date(b.createdAt).getTime();
-        return dateB - dateA;
-      });
-      
-
-      const latestReview = reviews[reviews.length - 1];
-
-      const post = {
-        id: latestReview.id,
-        username: user.username,
-        type: 'Reviews',
-        albumName: latestReview.albumName,
-        reviewText: latestReview.reviewText,
-        createdAt: latestReview.createdAt,
-      };
-
-      posts.push(post);
-    }
+  // Create a copy of the reviews array and then sort it
+  const sortedReviews = [...reviews].sort((a, b) => {
+    const dateA = new Date(a.createdAt).getTime();
+    const dateB = new Date(b.createdAt).getTime();
+    return dateB - dateA;
   });
+  console.log('sortedReviews:', sortedReviews);
 
   return (
     <div>
       <Navigation />
       <h1>Feed Page</h1>
-      {posts.map((post) => (
-        <div key={post.id}>
-          <h2>{post.username}</h2>
-          {post.type === 'Reviews' && (
-            <ul>
-              <li>
-                {post.username} posted a review for {post.albumName}: {post.reviewText}
-              </li>
-            </ul>
-          )}
-        </div>
-      ))}
+      <ul>
+        {sortedReviews.length > 0 ? (
+          sortedReviews.map((review) => (
+            <li key={review.id}>
+              <h2>{review.username}</h2>
+              <p>Album: {review.albumName}</p>
+              <p>Review: {review.reviewText}</p>
+            </li>
+          ))
+        ) : (
+          <p>No posts found.</p>
+        )}
+      </ul>
     </div>
   );
 };
 
 export default Feed;
+
+
+// 
+// import { useQuery } from '@apollo/client';
+// import { QUERY_REVIEWS } from '../utils/queries';
+// import Navigation from '../components/Navigation';
+
+// const Feed = () => {
+//   // Fetch the data using the QUERY_USERS query
+//   const { loading, error, data } = useQuery(QUERY_REVIEWS);
+
+//   if (loading) {
+//     return <p>Loading...</p>;
+//   }
+
+//   if (error) {
+//     return <p>Error occurred: {error.message}</p>;
+//   }
+
+//   const reviews = data?.reviews ?? [];
+
+//   // Create an array to store individual posts
+//   const posts = [];
+
+//   // Iterate over users and their actions to create posts
+//   reviews.forEach((review) => {
+//     const user = review.user; // Assuming each review has a reference to the user
+//     const userReviews = user?.reviews?.slice() ?? []; // Create a copy of the user's reviews array
+  
+  
+//     //   const latestReview = reviews[reviews.length - 1];
+//     if (userReviews.length > 0) {
+//       // Sort the reviews based on the createdAt property in descending order
+//       userReviews.sort((a, b) => {
+//         const dateA = new Date(a.createdAt).getTime();
+//         const dateB = new Date(b.createdAt).getTime();
+//         return dateB - dateA;
+//       });
+  
+//       const latestReview = userReviews[0]; // Retrieve the latest review
+
+//       const post = {
+//         id: latestReview.id,
+//         username: latestReview.username,
+//         type: 'Reviews',
+//         albumName: latestReview.albumName,
+//         reviewText: latestReview.reviewText,
+//         createdAt: latestReview.createdAt,
+//       };
+
+//       posts.push(post);
+//     }
+//   });
+
+//   return (
+//     <div>
+//     <Navigation />
+//     <h1>Feed Page</h1>
+//     {reviews.length > 0 ? (
+//       posts.map((post) => (
+//         <div key={post.id}>
+//           <h2>{post.username}</h2>
+//           {post.type === 'Reviews' && (
+//             <ul>
+//               <li>
+//                 {post.username} posted a review for {post.albumName}: {post.reviewText}
+//               </li>
+//             </ul>
+//           )}
+//         </div>
+//       ))
+//     ) : (
+//       <p>No posts found.</p>
+//     )}
+//   </div>
+// );
+// };
+
+// export default Feed;
 
 
 // import React from 'react';

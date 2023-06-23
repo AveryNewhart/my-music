@@ -24,6 +24,17 @@ const reviewSchema = new Schema({
   },
 });
 
+// Define static methods
+reviewSchema.statics.getReviewById = async function (id) {
+  // Implement the logic to retrieve a review by ID
+  try {
+    const review = await this.findById(id);
+    return review;
+  } catch (error) {
+    throw new Error('Failed to get review by ID');
+  }
+};
+
 const Review = model("Review", reviewSchema);
 
 module.exports = Review;
