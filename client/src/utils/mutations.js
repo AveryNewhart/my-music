@@ -113,6 +113,10 @@ export const ADD_REVIEW = gql`
         id
         albumName
         reviewText
+        user {
+          id
+          username
+        }
       }
     }
   }

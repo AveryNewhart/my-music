@@ -75,7 +75,7 @@ if (!searchResults || searchResults.length === 0) {
           variables: {
             input: {
               albumName,
-              reviewText
+              reviewText,
             }
           }
         });
