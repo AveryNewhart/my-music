@@ -2,7 +2,7 @@ const { model, Schema } = require("mongoose");
 const bcrypt = require("bcrypt");
 // const albumSchema = require('./Album')
 //! call in and reference the music and review models to be associated with the user model.
-
+ 
 const UserSchema = new Schema({
   username: {
     type: String,
@@ -51,7 +51,19 @@ const UserSchema = new Schema({
       albumName: { type: String },
       reviewText: { type: String },
       username: { type: String },
-    }],  
+    }],
+    followers: [
+      {
+        type: String,
+        ref: "User",
+      },
+    ],
+    following: [
+      {
+        type: String,
+        ref: "User",
+      },
+    ],  
 });
 
 UserSchema.pre("save", async function (next) {

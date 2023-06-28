@@ -1,5 +1,5 @@
 const { gql } = require("apollo-server-express");
-
+ 
 const typeDefs = gql`
   type User {
     id: ID
@@ -10,6 +10,8 @@ const typeDefs = gql`
     listenedAlbums: [Album]
     wannaListenAlbums: [Album]
     reviews: [Review]
+    followers: [User]
+    following: [User]
   }
 
   type Album {
@@ -80,6 +82,7 @@ const typeDefs = gql`
     addReview(input: AddReviewInput): User
     saveToListened(album: AlbumInput): User
     saveToWannaListen(album: AlbumInput): User
+    addFollower(id: ID!): User   # Add this mutation to follow a user
   }
 `;
 

@@ -1,5 +1,5 @@
 //! have to create the mutations for reviews, saving music. 
-
+ 
 const { AuthenticationError } = require("apollo-server-express");
 const { signToken } = require("../utils/auth");
 // import mongoose from "mongoose";
@@ -132,6 +132,7 @@ const resolvers = {
 
         return updatedUser;
         },
+
     saveToWannaListen: async (parent, { album }, context) => {
         // Generate a new ID for the album
         if (!context.user) {
@@ -149,6 +150,39 @@ const resolvers = {
 
         return updatedUser;
     },  
+
+    addFollower: async (parent, { id }, context) => {
+      // Check if user is logged in
+      if (!context.user) {
+        throw new AuthenticationError("You need to be logged in to follow users.");
+      }
+  
+      const loggedInUserId = context.user.id;
+  
+      // Find the user who will be followed
+      const userToFollow = await User.findOne({ id });
+      if (!userToFollow) {
+        throw new Error("User not found.");
+      }
+  
+      // Check if the user is already being followed
+      const isAlreadyFollowing = userToFollow.followers.includes(loggedInUserId);
+      if (isAlreadyFollowing) {
+        throw new Error("You are already following this user.");
+      }
+  
+      // Add the follower to the user being followed
+      userToFollow.followers.push(loggedInUserId);
+      await userToFollow.save();
+  
+      // Add the user being followed to the logged-in user's following list
+      const loggedInUser = await User.findOne({ id: loggedInUserId });
+      loggedInUser.following.push(userToFollow._id);
+      await loggedInUser.save();
+  
+      // Return the updated user being followed
+      return userToFollow;
+    },
   },
 };
 module.exports = resolvers;

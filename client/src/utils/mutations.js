@@ -103,7 +103,7 @@ export const SAVE_TO_WANNA_LISTEN = gql`
     }
   }
 `;
-
+ 
 export const ADD_REVIEW = gql`
   mutation addReview($input: AddReviewInput) {
     addReview(input: $input) {
@@ -113,6 +113,19 @@ export const ADD_REVIEW = gql`
         id
         albumName
         reviewText
+        username
+      }
+    }
+  }
+`;
+
+export const ADD_FOLLOWER = gql`
+  mutation addFollower($id: ID!) {
+    addFollower(id: $id) {
+      id
+      username
+      followers {
+        id
         username
       }
     }
