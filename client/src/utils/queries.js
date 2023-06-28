@@ -33,6 +33,14 @@ query user($username: String!) {
         reviewText
         createdAt
       }
+      followers {
+        id
+        username
+      }
+      following {
+        id
+        username
+      }
   }
 }
 `;
@@ -70,6 +78,14 @@ export const QUERY_USERS = gql`
         reviewText
         createdAt
       }
+      followers {
+        id
+        username
+      }
+      following {
+        id
+        username
+      }
     }
   }
 `;
@@ -104,6 +120,14 @@ query protected {
         id
         albumName
         reviewText
+      }
+      followers {
+        id
+        username
+      }
+      following {
+        id
+        username
       }
   }
 }
