@@ -2,8 +2,11 @@ import React from 'react';
 import { useQuery } from '@apollo/client';
 import { QUERY_REVIEWS } from '../utils/queries';
 import Navigation from '../components/Navigation';
+import { useNavigate, useParams } from 'react-router-dom';
 
 const Feed = () => {
+  const navigate = useNavigate()
+
   // Fetch the data using the QUERY_REVIEWS query
   const { loading, error, data } = useQuery(QUERY_REVIEWS);
 
@@ -36,7 +39,8 @@ const Feed = () => {
         {sortedReviews.length > 0 ? (
           sortedReviews.reverse().map((review, index) => (
             <li key={index}>
-              <h2>{review.username}</h2>
+              {/* <h2>{review.username}</h2> */}
+              <button onClick={() => navigate(`/profile/${review.username}`)}>{review.username}</button>
               <p>Album: {review.albumName}</p>
               <p>Review: {review.reviewText}</p>
             </li>
@@ -52,7 +56,7 @@ const Feed = () => {
 export default Feed;
 
 
-// 
+//
 // import { useQuery } from '@apollo/client';
 // import { QUERY_REVIEWS } from '../utils/queries';
 // import Navigation from '../components/Navigation';
@@ -78,8 +82,8 @@ export default Feed;
 //   reviews.forEach((review) => {
 //     const user = review.user; // Assuming each review has a reference to the user
 //     const userReviews = user?.reviews?.slice() ?? []; // Create a copy of the user's reviews array
-  
-  
+
+
 //     //   const latestReview = reviews[reviews.length - 1];
 //     if (userReviews.length > 0) {
 //       // Sort the reviews based on the createdAt property in descending order
@@ -88,7 +92,7 @@ export default Feed;
 //         const dateB = new Date(b.createdAt).getTime();
 //         return dateB - dateA;
 //       });
-  
+
 //       const latestReview = userReviews[0]; // Retrieve the latest review
 
 //       const post = {

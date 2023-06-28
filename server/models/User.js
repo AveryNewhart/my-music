@@ -2,13 +2,13 @@ const { model, Schema } = require("mongoose");
 const bcrypt = require("bcrypt");
 // const albumSchema = require('./Album')
 //! call in and reference the music and review models to be associated with the user model.
- 
+
 const UserSchema = new Schema({
   username: {
     type: String,
     unique: true,
     required: true,
-    trim: true,
+    trim: true
   },
   email: {
     type: String,
@@ -16,54 +16,61 @@ const UserSchema = new Schema({
     required: true,
     match: [
       /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/,
-      "Must match an email address",
-    ],
+      "Must match an email address"
+    ]
   },
   password: {
     type: String,
     required: true,
-    minlength: 6,
+    minlength: 6
   },
   profilePicture: {
     type: String,
-    default: "https://villagesonmacarthur.com/wp-content/uploads/2020/12/Blank-Avatar.png"
+    default:
+      "https://villagesonmacarthur.com/wp-content/uploads/2020/12/Blank-Avatar.png"
   },
-    // New fields for album categories
-    listenedAlbums: [{
+  // New fields for album categories
+  listenedAlbums: [
+    {
       id: { type: String },
-      createdAt: {  type: Date, default: Date.now,},
+      createdAt: { type: Date, default: Date.now },
       albumName: { type: String },
       artistName: { type: String },
       albumPic: { type: String },
       releaseDate: { type: String }
-    }],
-    wannaListenAlbums: [{
+    }
+  ],
+  wannaListenAlbums: [
+    {
       id: { type: String },
-      createdAt: {  type: Date, default: Date.now,},
+      createdAt: { type: Date, default: Date.now },
       albumName: { type: String },
       artistName: { type: String },
       albumPic: { type: String },
       releaseDate: { type: String }
-    }],
-    reviews: [{
+    }
+  ],
+  reviews: [
+    {
       id: { type: String },
-      createdAt: {  type: Date, default: Date.now,},
+      createdAt: { type: Date, default: Date.now },
       albumName: { type: String },
       reviewText: { type: String },
-      username: { type: String },
-    }],
-    followers: [
-      {
-        type: String,
-        ref: "User",
-      },
-    ],
-    following: [
-      {
-        type: String,
-        ref: "User",
-      },
-    ],  
+      username: { type: String }
+    }
+  ],
+  followers: [
+    {
+      type: String,
+      ref: "User"
+    }
+  ],
+  following: [
+    {
+      type: String,
+      ref: "User"
+    }
+  ]
 });
 
 UserSchema.pre("save", async function (next) {

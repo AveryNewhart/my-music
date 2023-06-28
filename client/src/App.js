@@ -2,7 +2,7 @@ import React from 'react';
 import {
   ApolloClient,
   InMemoryCache,
-  ApolloProvider, 
+  ApolloProvider,
   createHttpLink,
 } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
@@ -52,27 +52,27 @@ function App() {
         <div className='flex-column justify-flex-start min-vh-100 main-div'>
           <div>
             <Routes>
-            <Route 
+            <Route
                 path="/"
                 element={<Home />}
               />
-                 <Route 
+                 <Route
                 path="/login"
                 element={<Login />}
               />
-                    <Route 
+                    <Route
                 path="/profile"
                 element={<Profile />}
               />
-                      <Route 
+                      <Route
                 path="/feed"
                 element={<Feed />}
               />
-                          <Route 
+                          <Route
                 path="/signup"
                 element={<Signup />}
               />
-                                        <Route 
+                                        <Route
                 path="/searchedresults"
                 element={<SearchResultsPage />}
               />
