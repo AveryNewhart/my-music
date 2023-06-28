@@ -56,7 +56,7 @@ const Login = () => {
       const { data } = await loginUser({ variables: { ...userFormData } });
 
       Auth.login(data.loginUser.token);
-      window.location.href = '/profile';
+      window.location.href = '/profile/:id';
     } catch (err) {
       console.error(err);
       setShowAlert(true);

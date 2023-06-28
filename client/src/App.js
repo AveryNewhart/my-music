@@ -17,6 +17,7 @@ import Profile from './pages/Profile';
 import Feed from './pages/Feed';
 import Signup from './pages/Signup';
 import SearchResultsPage from './pages/SearchResultsPage';
+import AnyProfile from './pages/AnyProfile';
 // import EditProfile from "./pages/EditProfile";
 
 
@@ -61,7 +62,7 @@ function App() {
                 element={<Login />}
               />
                     <Route
-                path="/profile"
+                path="/profile/:id"
                 element={<Profile />}
               />
                       <Route
@@ -76,6 +77,11 @@ function App() {
                 path="/searchedresults"
                 element={<SearchResultsPage />}
               />
+              {/* <Route
+                path="/profile/:username"
+                element={<Profile />}
+              /> */}
+              <Route path="/anyprofile/:username" element={<AnyProfile />} />
             </Routes>
             {/* <Route path="/editprofile/:profileId" element={<EditProfile />} /> */}
           </div>

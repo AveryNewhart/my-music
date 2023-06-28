@@ -40,7 +40,7 @@ const Feed = () => {
           sortedReviews.reverse().map((review, index) => (
             <li key={index}>
               {/* <h2>{review.username}</h2> */}
-              <button onClick={() => navigate(`/profile/${review.username}`)}>{review.username}</button>
+              <button onClick={() => navigate(`/anyprofile/${review.username}`)}>{review.username}</button>
               <p>Album: {review.albumName}</p>
               <p>Review: {review.reviewText}</p>
             </li>

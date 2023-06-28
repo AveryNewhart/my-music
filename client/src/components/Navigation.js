@@ -40,7 +40,7 @@ export default function Navigation() {
                             {/* <Nav.Link href='/'>Homepage</Nav.Link> */}
                              {Auth.loggedIn() && (
                                 <>
-                                    <Nav.Link href="/profile">Profile</Nav.Link>,
+                                    <Nav.Link href="/profile/:id">Profile</Nav.Link>,
                                     <Nav.Link href="/feed">Feed</Nav.Link>
                                 </>
                             )}
