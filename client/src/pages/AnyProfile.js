@@ -1,7 +1,9 @@
 import React from 'react';
-import { useQuery } from '@apollo/client';
+import { useQuery, useMutation } from '@apollo/client';
 import { useParams } from 'react-router-dom';
 import { QUERY_USER } from '../utils/queries';
+import { ADD_FOLLOWER } from '../utils/mutations';
+import Navigation from "../components/Navigation.js";
 
 const AnyProfile = () => {
     const { username } = useParams();
@@ -10,6 +12,9 @@ const AnyProfile = () => {
     const { loading, error, data } = useQuery(QUERY_USER, {
       variables: { username },
     });
+
+      // Add the mutation hook
+  const [addFollower] = useMutation(ADD_FOLLOWER);
   
     if (loading) {
       return <p>Loading...</p>;
@@ -23,12 +28,32 @@ const AnyProfile = () => {
     if (!user) {
       return <p>User not found</p>;
     }
+    const handleFollow = async () => {
+        try {
+          // Execute the mutation
+          const { data } = await addFollower({
+            variables: { id: user.id }, // Pass the user ID as a variable
+          });
+      
+          // Get the updated user data from the mutation response
+          const updatedUser = data.addFollower;
+      
+          // Update the user state or perform any other necessary actions
+          // ...
+        } catch (error) {
+          console.error(error);
+          // Handle any errors that occur during the mutation
+          // ...
+        }
+      };
   
     // Return JSX to display user data
     return (
       <div>
+        <Navigation />
         {/* Display user data */}
         <h1>{user.username}</h1>
+        <button onClick={handleFollow}>Follow</button>
         <div className="section">
           <h3>Followers</h3>
           {/*might not have to do map, might have to do it another way so it doesnt show all users, just a number  */}
