@@ -60,7 +60,7 @@ const Signup = () => {
           });
     
           Auth.login(data.createUser.token);
-          window.location.href = '/profile';
+          window.location.href = '/profile/:id';
           // history.push("/profile");
         } catch (err)
         {
