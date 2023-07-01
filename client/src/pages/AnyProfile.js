@@ -17,6 +17,8 @@ const AnyProfile = () => {
   const [addFollower] = useMutation(ADD_FOLLOWER);
 
   const [user, setUser] = useState(null);
+    // State to track if the user is already being followed
+    const [isFollowing, setIsFollowing] = useState(false);
 
     // Use useEffect to update the user state when the data changes
     useEffect(() => {
@@ -51,16 +53,19 @@ const AnyProfile = () => {
       // const userToFollow = data?.user;
 
            // Update the user's following count
-      setUser((prevUser) => ({
-        ...prevUser,
-        following: prevUser.following ? [...prevUser.following, { _id: prevUser._id, username: prevUser.username }] : [{ _id: prevUser._id, prevUser: user.username }],
-      }));
+           setUser((prevUser) => ({
+            ...prevUser,
+            following: prevUser.following ? [...prevUser.following, user._id] : [user._id],
+          }));
 
       // Refetch the user data to get the updated following count
       refetch();
       
           // Update the user state or perform any other necessary actions
           // ...
+                // Update the isFollowing state based on the response
+      setIsFollowing(true);
+
         } catch (error) {
           console.error(error);
           // Handle any errors that occur during the mutation
@@ -73,7 +78,12 @@ const AnyProfile = () => {
           <Navigation />
           {/* Display user data */}
           <h1>{user?.username}</h1>
-          <button onClick={handleFollow}>Follow</button>
+          {isFollowing ? (
+        <button disabled>Following</button>
+      ) : (
+        <button onClick={handleFollow}>Follow</button>
+      )}
+          {/* <button onClick={handleFollow}>Follow</button> */}
           {/* <div className="section">
             <h3>Followers</h3>
             {user?.followers.map((follower) => (
