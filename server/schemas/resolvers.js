@@ -1,6 +1,6 @@
 //! have to create the mutations for reviews, saving music. 
  
-const { AuthenticationError } = require("apollo-server-express");
+const { AuthenticationError, UserInputError } = require("apollo-server-express");
 const { signToken } = require("../utils/auth");
 // import mongoose from "mongoose";
 const mongoose = require("mongoose");
@@ -182,6 +182,10 @@ const resolvers = {
     
 
     addFollower: async (_, { id }, { user }) => {
+      console.log(user); // Check if the user object is defined
+      console.log(user.followers); // Check if followers property is defined
+      console.log(user.following); // Check if following property is defined
+      console.log(id); // Check the value of the id parameter
       // Check if user is logged in
       if (!user) {
         throw new AuthenticationError("You need to be logged in to follow users.");
@@ -189,24 +193,35 @@ const resolvers = {
 
       try {
         // Find the user to follow
-        const userToFollow = await User.findById({_id: id});
+        // const userToFollow = await User.findById(id);
+        const userToFollow = await User.findById(id).populate('followers').populate('following');
 
         if (!userToFollow) {
           throw new UserInputError('User not found');
         }
 
         // Update the following field for the user being followed
-        userToFollow.following.push(user._id);
+        userToFollow.followers.push(user._id);
 
         // Save the changes
         await userToFollow.save();
+
+//         // Update the following field for the user being followed
+// userToFollow.following.push(user._id);
+
+// // Update the followers field for the current user
+// user.followers.push(userToFollow._id);
+
+// // Save the changes
+// await Promise.all([userToFollow.save(), user.save()]);
 
         // Return the updated user
         return userToFollow;
       } catch (error) {
         console.log(error);
-        throw new Error('Failed to add follower');
+        throw new Error('Failed to add follower: ' + error.message);
       }
+      
     },
   
     //   const loggedInUserId = context.user.id;
