@@ -48,12 +48,12 @@ const AnyProfile = () => {
           // Get the updated user data from the mutation response
           // const updatedUser = data.addFollower;
             // Get the user being followed
-      const userToFollow = data?.user;
+      // const userToFollow = data?.user;
 
            // Update the user's following count
       setUser((prevUser) => ({
         ...prevUser,
-        following: prevUser.following ? [...prevUser.following, { _id: userToFollow._id, username: userToFollow.username }] : [{ _id: userToFollow._id, username: userToFollow.username }],
+        following: prevUser.following ? [...prevUser.following, { _id: prevUser._id, username: prevUser.username }] : [{ _id: prevUser._id, prevUser: user.username }],
       }));
 
       // Refetch the user data to get the updated following count
