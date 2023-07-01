@@ -160,7 +160,7 @@ const resolvers = {
       const loggedInUserId = context.user.id;
   
       // Find the user who will be followed
-      const userToFollow = await User.findOne({ id });
+      const userToFollow = await User.findOne({ _id: id });
       if (!userToFollow) {
         throw new Error("User not found.");
       }
@@ -176,7 +176,7 @@ const resolvers = {
       await userToFollow.save();
   
       // Add the user being followed to the logged-in user's following list
-      const loggedInUser = await User.findOne({ id: loggedInUserId });
+      const loggedInUser = await User.findOne({ _id: loggedInUserId });
       loggedInUser.following.push(userToFollow._id);
       await loggedInUser.save();
   
