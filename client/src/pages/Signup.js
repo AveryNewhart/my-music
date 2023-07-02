@@ -145,6 +145,8 @@ const Signup = () => {
               </div> */}
                 <div>
                   <p className="mb-0 centerLogin">Already have an account? <a href="/login" className="text-black-50 fw-bold">Login</a></p>
+                  <br/>
+                  <p className="mb-0 centerLogin">Return home? <a href="/" className="text-black-50 fw-bold">Home</a></p>
                 </div>
               </form>
             </MDBCardBody>

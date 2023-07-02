@@ -1,28 +1,41 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Metal+Mania&family=Rubik+Puddles&family=Zen+Dots&display=swap');
+
 .home-container {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     height: 100vh;
-    background-color: #f1f1f1;
+    background-color: #5bc0be;
   }
   
   .home-head {
-    font-size: 2.5rem;
-    margin-top: -10rem;
-    margin-bottom: 3rem;
-    color: #333;
+    font-size: 3.5rem;
+    margin-top: -14rem;
+    margin-bottom: 4rem;
+    color: #5bc0be;
+    /* border-bottom: 5px solid hsl(263, 87%, 35%); */
+    background-color: #001233;
+    padding: 15px;
+    border-radius: 5%;
+    font-family: 'Rubik Puddles';
   }
 
   .home-head-3 {
     margin-top: -1rem;
     margin-bottom: 2rem;
+    color: #001233;
+    border-bottom: 3.5px solid hsl(263, 87%, 35%);
+    font-family: 'Zen Dots';
   }
   
   .home-subtitle {
-    font-size: 1.2rem;
+    font-size: 1rem;
     margin-bottom: 1rem;
-    color: #777;
+    margin-top: 2rem;
+    color: #001233;
+    border-bottom: 1.5px solid hsl(263, 87%, 35%);
+    font-family: 'Zen Dots';
   }
 
   

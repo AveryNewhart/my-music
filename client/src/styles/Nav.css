@@ -4,13 +4,13 @@
 --dark-spring-green: #0c7c59ff;
 --gunmetal: #2b303aff;
 --ultra-violet: #6c698dff; */
-
+ 
   @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Metal+Mania&family=Rubik+Puddles&family=Zen+Dots&display=swap');
 
 .back-nav {
     /* background-color: rgba(33, 32, 32, 0.992); */
     background-color: #001233;
-    border-bottom: 5px solid #5bc0be;
+    border-bottom: 5px solid hsl(263, 87%, 35%);
     width: 100vw;
 }
 
