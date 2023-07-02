@@ -1,19 +1,16 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {
   MDBCard,
   MDBCardBody,
   MDBCardText,
   MDBCardImage
 } from 'mdb-react-ui-kit';
+import { Modal, ModalHeader, ModalBody, ModalFooter } from 'react-bootstrap';
+
 import { useParams } from "react-router-dom";
 import { useQuery } from '@apollo/client';
 import { QUERY_PROTECTED } from "../utils/queries";
 import ProfilePicture from '../components/ProfilePicture';
-// import Userfront from "@userfront/core";
-// import {  Alert } from "react-bootstrap";
-// import Auth from "../utils/auth";
-
-// import "../styles/App.css";
 import "../styles/UserCard.css";
 import DeafultPic from "../images/defaultprof.png"
 
@@ -22,6 +19,12 @@ import DeafultPic from "../images/defaultprof.png"
 // Define the Login form component
 const UserCard = () => {
   const { username } = useParams();
+
+  // eslint-disable-next-line
+  const [activeTab, setActiveTab] = useState('followers');
+  const [followersModalOpen, setFollowersModalOpen] = useState(false);
+  const [followingModalOpen, setFollowingModalOpen] = useState(false);
+
    // Query current user data
   //  const { loading, data } = useQuery(QUERY_PROTECTED);
   const { loading, data } = useQuery(QUERY_PROTECTED, 
@@ -32,7 +35,18 @@ const UserCard = () => {
    // Check if user data is present else provide empty obj
    const user = data?.protected;
    console.log(user)
+
+   const handleTabClick = (tabName) => {
+    setActiveTab(tabName);
   
+    if (tabName === 'followers') {
+      setFollowersModalOpen(true);
+    } else if (tabName === 'following') {
+      setFollowingModalOpen(true);
+    }
+  };
+
+   
     if (loading) return <p>Loading...</p>;
     // if (error) return <p>Error: {error.message}</p>;
   
@@ -54,12 +68,73 @@ const UserCard = () => {
           <ProfilePicture />
           <div className="section">
           <h3>Followers</h3>
-          <p>{user.followers.length}</p>
+          <p>
+            <button
+              className="link-button"
+              onClick={() => handleTabClick('followers')}
+            >
+              {user.followers.length}
+            </button>
+          </p>
+          {/* <p>{user.followers.length}</p> */}
         </div>
         <div className="section">
           <h3>Following</h3>
-          <p>{user.following.length}</p>
+          <p>
+            <button
+              className="link-button"
+              onClick={() => handleTabClick('following')}
+            >
+              {user.following.length}
+            </button>
+          </p>
+          {/* <p>{user.following.length}</p> */}
         </div>
+                {/* Followers Modal */}
+      <Modal show={followersModalOpen} onHide={() => setFollowersModalOpen(false)}>
+        <ModalHeader closeButton>
+          Followers
+        </ModalHeader>
+        <ModalBody>
+          {user.followers.length > 0 ? (
+            <div className="user-list">
+          {user.followers.map((user, index) => (
+            <h3 key={index}>{user.username}</h3>
+              ))}
+            </div>
+          ) : (
+            <p>No followers found.</p>
+          )}
+        </ModalBody>
+        <ModalFooter>
+          <button className="btn btn-secondary" onClick={() => setFollowersModalOpen(false)}>
+            Close
+          </button>
+        </ModalFooter>
+      </Modal>
+
+      {/* Following Modal */}
+      <Modal show={followingModalOpen} onHide={() => setFollowingModalOpen(false)}>
+        <ModalHeader closeButton>
+          Following
+        </ModalHeader>
+        <ModalBody>
+          {user.following.length > 0 ? (
+            <div className="user-list">
+              {user.following.map((user, index) => (
+                <h3 key={index}>{user.username}</h3>
+              ))}
+            </div>
+          ) : (
+            <p>No following found.</p>
+          )}
+        </ModalBody>
+        <ModalFooter>
+          <button className="btn btn-secondary" onClick={() => setFollowingModalOpen(false)}>
+            Close
+          </button>
+        </ModalFooter>
+      </Modal>
         <div className="section">
           <h3>Listened Albums</h3>
           {user.listenedAlbums.map((album, index) => (
