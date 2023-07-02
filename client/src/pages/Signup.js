@@ -13,11 +13,12 @@ import {
   MDBCardBody,
   MDBInput,
 //   MDBCheckbox,
-  MDBIcon
+  // MDBIcon
 }
 from 'mdb-react-ui-kit';
 import "@fortawesome/fontawesome-free/css/all.min.css";
-
+import "../styles/Signup.css"
+ 
 const Signup = () => {
     const [userFormData, setUserFormData] = useState({
         email: "",
@@ -76,7 +77,7 @@ const Signup = () => {
       };
 
   return (
-    <MDBContainer fluid className='p-4 overflow-hidden'>
+    <MDBContainer fluid className='p-4 overflow-hidden margin-top'>
 
       <MDBRow>
       <Alert
@@ -96,7 +97,11 @@ const Signup = () => {
           </h1>
 
           <p className='px-3' style={{color: 'hsl(218, 81%, 85%)'}}>
-            write a message here describing the site and what not, make it like 3-5 lines
+          Are you ready for a music experience like no other?
+          With My Music, you can search up your favorite artists and dive deep into their album data. 
+          Save albums to your listened or wanna listen categories, then you can share your thoughts with the world by posting your reviews on our vibrant feed. 
+          Connect with fellow music lovers by exploring their profiles and hit that follow button! 
+          Get ready to unleash your passion for music with My Music.
           </p>
 
         </MDBCol>
@@ -129,7 +134,7 @@ const Signup = () => {
 
               <MDBBtn className='w-100 mb-4' size='md' type='submit' >sign up</MDBBtn>
 
-              <div className="text-center">
+              {/* <div className="text-center">
 
                 <p>or sign up with:</p>
 
@@ -137,7 +142,10 @@ const Signup = () => {
                   <MDBIcon fab icon='google' size="sm"/>
                 </MDBBtn>
 
-              </div>
+              </div> */}
+                <div>
+                  <p className="mb-0 centerLogin">Already have an account? <a href="/login" className="text-black-50 fw-bold">Login</a></p>
+                </div>
               </form>
             </MDBCardBody>
             {/* </form> */}
