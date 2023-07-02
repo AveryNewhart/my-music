@@ -1,14 +1,45 @@
 body {
     /* fallback for old browsers */
-    background: #6a11cb;
-  
-    /* Chrome 10-25, Safari 5.1-6 */
-    background: -webkit-linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1));
-  
-    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-    background: linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1))
+    background: #5bc0be;
+
+    background: linear-gradient(to right, #5bc0be, #5bc0be)
   }
 
   .centerLogin {
     text-align: center;
+  }
+
+  .marginLogin {
+    margin-top: 15vh;
+  }
+
+  .fw-bold {
+    /* color: hsl(263, 87%, 35%); */
+    color: #5bc0be;
+  }
+
+  .fw-bold:hover {
+    color: hsl(263, 87%, 35%);
+  }
+
+  .loginText {
+    color: hsl(263, 87%, 35%);
+    background-color: #5bc0be;
+    border-radius: 2%;
+  }
+
+  .loginLabel {
+    color: #5bc0be;
+  }
+
+  button.loginButton {
+    background: hsl(263, 87%, 35%);
+    border: none;
+    color: #5bc0be;
+  }
+
+  button.loginButton:hover {
+    box-shadow: 0 0 5px hsl(263, 87%, 35%), 0 0 25px hsl(263, 87%, 35%), 0 0 50px hsl(263, 87%, 35%);
+    background-color: #5bc0be;
+    color: hsl(263, 87%, 35%);
   }

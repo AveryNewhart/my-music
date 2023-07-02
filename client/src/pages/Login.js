@@ -77,7 +77,7 @@ const Login = () => {
 //   }
  
     return (
-        <MDBContainer fluid>
+        <MDBContainer fluid className='marginLogin'>
                   <Alert
           dismissible
           onClose={() => setShowAlert(false)}
@@ -87,23 +87,23 @@ const Login = () => {
           Something went wrong with your login credentials!
         </Alert>
 
-        <MDBRow className='d-flex justify-content-center align-items-center h-100'>
+        <MDBRow className='d-flex justify-content-center align-items-center h-100 '>
           <MDBCol col='12'>
   
-            <MDBCard className='bg-dark text-white my-5 mx-auto' style={{borderRadius: '1rem', maxWidth: '400px'}}>
-              <MDBCardBody className='p-5 d-flex flex-column align-items-center mx-auto w-100'>
+            <MDBCard className='text-white my-5 mx-auto' style={{borderRadius: '1rem', maxWidth: '400px', backgroundColor: "#001233"}}>
+              <MDBCardBody className='p-5 d-flex flex-column align-items-center mx-auto w-100 '>
               <form onSubmit={handleFormSubmit}>
   
                 <h2 className="fw-bold mb-2 text-uppercase centerLogin">Login</h2>
-                <p className="text-white-50 mb-5">Please enter your login and password!</p>
+                <p className="mb-5 loginText">Please enter your email and password!</p>
 
-                <MDBInput labelClass='text-white' label='Email address' 
+                <MDBInput labelClass='loginLabel' label='Email address' 
                 // id='formControlLg' 
                 type='email' 
                 // value={userFormData.email} 
                 name="email"
                 onChange={handleInputChange} size="lg"/>
-                <MDBInput labelClass='text-white' label='Password' 
+                <MDBInput labelClass='loginLabel' label='Password' 
                 // id='formControlLg' 
                 type='password' 
                 // value={userFormData.password} 
@@ -113,7 +113,7 @@ const Login = () => {
                 {/* <MDBBtn outline className='mx-2 px-5' size='lg' type='submit'>
                   Login
                 </MDBBtn> */}
-                  <MDBBtn className='w-100 mb-4' size='md' type='submit' >Login</MDBBtn>
+                  <MDBBtn className='w-100 mb-4 loginButton' size='md' type='submit' >Login</MDBBtn>
   
                 {/* <div className='d-flex flex-row mt-3 mb-5'>
   
@@ -123,9 +123,9 @@ const Login = () => {
                 </div> */}
   
                 <div>
-                  <p className="mb-0 centerLogin">Don't have an account? <a href="/signup" className="text-white-50 fw-bold">Sign Up</a></p>
+                  <p className="mb-0 centerLogin loginLabel">Don't have an account? <a href="/signup" className="fw-bold">Sign Up</a></p>
                   <br/>
-                  <p className="mb-0 centerLogin">Return home? <a href="/" className="text-black-50 fw-bold">Home</a></p>
+                  <p className="mb-0 centerLogin loginLabel">Return home? <a href="/" className="fw-bold">Home</a></p>
                 </div>
                 </form>
               </MDBCardBody>
