@@ -1,22 +1,43 @@
-.coverArt {
-  max-width: 200px;
-  max-height: 200px;
+.centerHead {
+  text-align: center;
 }
 
-.albumMain {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  /* margin-left: 10px;
-  margin-right: 10px;
-  flex-wrap: wrap; */
-  flex-wrap: wrap;
+.searchResultsContainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  justify-content: center;
 }
 
 .albumInside {
-  /* margin-left: 10px;
-  margin-right: 10px; */
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   text-align: center;
+}
+
+.albumInside p {
+  margin: 0;
+}
+
+.coverArt {
+  width: 100%;
+  max-width: 300px;
+  height: auto;
+}
+
+button.saveButtons {
+  margin-top: 10px;
+  /* display: flex;
+  justify-content: center;
+  align-items: center; */
+}
+
+.reviewBtn {
+  margin-top: 10px;
 }
 
 div.modal {

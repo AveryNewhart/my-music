@@ -119,38 +119,42 @@ const openModal = (album) => {
   };
   
 
-    return (
-        <div>
-          <Navigation />
-          <h1>Search Results</h1>
-          {searchResults.map((album, index) => (
-            <div key={index} className="albumInside">
-              <p>Artist: {album.artistName}</p>
-              <img src={album.albumPic} alt="" className="coverArt" />
-              <p>Album: {album.albumName}</p>
-              <p>Release Date: {album.releaseDate}</p>
-              <div>
-                <button
-                  variant="primary"
-                  className=""
-                  onClick={() => handleSaveToListened(album)}
-                >
-                  Save to Listened
-                </button>
-                <button
-                  variant="primary"
-                  className=""
-                  onClick={() => handleSaveToWannaListen(album)}
-                >
-                  Save to Wanna Listen
-                </button>
-              </div>
-              <button className="reviewBtn"onClick={() => openModal(album)}>
-                Add Review
+  return (
+    <div>
+      <Navigation />
+      <h1 className='centerHead'>Search Results</h1>
+      <div className="searchResultsContainer">
+        {searchResults.map((album, index) => (
+          <div key={index} className="albumInside">
+            <p>Artist: {album.artistName}</p>
+            <img src={album.albumPic} alt="" className="coverArt" />
+            <p>Album: {album.albumName}</p>
+            <p>Release Date: {album.releaseDate}</p>
+            <div>
+              <button
+                variant="primary"
+                className="saveButtons"
+                onClick={() => handleSaveToListened(album)}
+              >
+                Save to Listened
               </button>
             </div>
-          ))}
-           {isModalOpen && selectedAlbum && (
+            <div>
+              <button
+                variant="primary"
+                className="saveButtons"
+                onClick={() => handleSaveToWannaListen(album)}
+              >
+                Save to Wanna Listen
+              </button>
+            </div>
+            <button className="reviewBtn" onClick={() => openModal(album)}>
+              Add Review
+            </button>
+          </div>
+        ))}
+      </div>
+      {isModalOpen && selectedAlbum && (
         <div className="modal">
           <div className="modal-content">
             <h2>Add Review For: {selectedAlbum.albumName}</h2>
@@ -166,9 +170,10 @@ const openModal = (album) => {
           </div>
         </div>
       )}
-        </div>
-      );
-          };
+    </div>
+  );
+};
+
       
 
 export default SearchResultsPage;
