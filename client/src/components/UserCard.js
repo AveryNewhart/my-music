@@ -55,16 +55,16 @@ const UserCard = () => {
           <div className="section">
           <h3>Followers</h3>
           {/*might not have to do map, might have to do it another way so it doesnt show all users, just a number  */}
-          {/* {user.followers.map((user) => (
+          {user.followers.map((user) => (
             <h3>{user.username}</h3>
-          ))} */}
+          ))}
         </div>
         <div className="section">
           <h3>Following</h3>
            {/*might not have to do map, might have to do it another way so it doesnt show all users, just a number  */}
-          {/* {user.following.map((user) => (
+          {user.following.map((user) => (
             <h3>{user.username}</h3>
-          ))} */}
+          ))}
         </div>
         <div className="section">
           <h3>Listened Albums</h3>

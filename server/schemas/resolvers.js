@@ -36,7 +36,9 @@ const resolvers = {
     protected: async (parent, args, context) => {
       //!Query defined in typeDef for authentication
       if (context.user) {
-        const user = await User.findOne({ _id: context.user._id });
+        const user = await User.findOne({ _id: context.user._id })
+        .populate("following")
+        .populate("followers");
         console.log(context.user);
         return user;
       }
@@ -151,40 +153,6 @@ const resolvers = {
         return updatedUser;
     },  
 
-    // addFollower: async (_, { id }, { loggedInUserId }) => {
-    //   if (!loggedInUserId) {
-    //     throw new Error("You must be logged in to perform this action.");
-    //   }
-
-    //   try {
-    //     const user = await User.findById(loggedInUserId);
-    //     const follower = await User.findById(id);
-
-    //     if (!user) {
-    //       throw new Error("User not found.");
-    //     }
-
-    //     if (!follower) {
-    //       throw new Error("Follower not found.");
-    //     }
-
-    //     if (user.following.includes(id)) {
-    //       throw new Error("You are already following this user.");
-    //     }
-
-    //     user.following.push(id);
-    //     follower.followers.push(loggedInUserId);
-
-    //     await user.save();
-    //     await follower.save();
-
-    //     return user;
-    //   } catch (err) {
-    //     throw new Error(err.message);
-    //   }
-    // },
-
-
     addFollower: async (_, { id }, context) => {
       if (!context.user) {
         throw new AuthenticationError("You need to be logged in to follow users.");
@@ -217,71 +185,6 @@ const resolvers = {
       }
     },
     
-    //!no errors in console but null follower id
-    // addFollower: async (_, { id }, context) => {
-    //   // console.log(user); // Check if the user object is defined
-    //   // console.log(user.followers); // Check if followers property is defined
-    //   // console.log(user.following); // Check if following property is defined
-    //   // console.log(id); // Check the value of the id parameter
-    //   // Check if user is logged in
-    //   if (!context.user) {
-    //     throw new AuthenticationError("You need to be logged in to follow users.");
-    //   }
-
-    //   try {
-    //     // Find the user to follow
-    //     // const userToFollow = await User.findById(id);
-    //     const loggedInUserId = context.user.id;
-    //     const userToFollow = await User.findById(id).populate('followers').populate('following');
-
-    //           // Check if the user is already being followed
-    //   const isAlreadyFollowing = userToFollow.followers.includes(loggedInUserId);
-    //   if (isAlreadyFollowing) {
-    //     throw new Error("You are already following this user.");
-    //   }
-
-    //     if (!userToFollow) {
-    //       throw new UserInputError('User not found');
-    //     }
-
-    //     // Update the following field for the user being followed
-    //     userToFollow.followers.push(loggedInUserId);
-    //          // Add the user being followed to the logged-in user's following list
-    //   const loggedInUser = await User.findOne({ id: loggedInUserId });
-    //   loggedInUser.following.push(userToFollow._id);
-    //   await loggedInUser.save();
-        
-    //         // // Update the following field for the current user
-    //         // user.following.push(userToFollow._id);
-
-    //             // Initialize the following field for the current user if it's undefined
-    
-    // // if (!user.following) {
-    // //   user.following = [];
-    // // }
-
-    // // // Update the following field for the current user
-    // // user.following.push(id);
-    //      // Update the following field for the current user
-    //     //  user.following.push(userToFollow._id);
-    
-
-
-    //     // Save the changes
-    //     // await userToFollow.save();
-    //      // Save the changes for both users
-    // await Promise.all([userToFollow.save()]);
-
-    //     // Populate the followers and following fields for the updated user object
-
-    //     // Return the updated user
-    //     return userToFollow;
-    //   } catch (error) {
-    //     console.log(error);
-    //     throw new Error('Failed to add follower: ' + error.message);
-    //   }
-      
-    // },
   },
 };
 module.exports = resolvers;

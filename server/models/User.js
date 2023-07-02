@@ -67,18 +67,6 @@ const UserSchema = new Schema({
     type: [{ type: Schema.Types.ObjectId, ref: "User" }],
     default: [],
   },
-  // followers: [
-  //   {
-  //     type: String,
-  //     ref: "User"
-  //   }
-  // ],
-  // following: [
-  //   {
-  //     type: String,
-  //     ref: "User"
-  //   }
-  // ]
 });
 
 UserSchema.pre("save", async function (next) {

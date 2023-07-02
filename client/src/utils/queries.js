@@ -90,15 +90,14 @@ export const QUERY_USERS = gql`
   }
 `;
 
-
 export const QUERY_PROTECTED = gql`
-query protected {
-  protected {
-    id
-    username
-    email
-    profilePicture
-    listenedAlbums {
+  query protected {
+    protected {
+      id
+      username
+      email
+      profilePicture
+      listenedAlbums {
         id
         albumName
         artistName
@@ -124,14 +123,62 @@ query protected {
       followers {
         id
         username
+        # Add any additional fields you need from the followers
+        # ...
       }
       following {
         id
         username
+        # Add any additional fields you need from the following
+        # ...
       }
+    }
   }
-}
 `;
+
+
+
+// export const QUERY_PROTECTED = gql`
+// query protected {
+//   protected {
+//     id
+//     username
+//     email
+//     profilePicture
+//     listenedAlbums {
+//         id
+//         albumName
+//         artistName
+//         albumPic
+//         releaseDate
+//         # Add any additional fields you need from the listenedAlbums
+//         # ...
+//       }
+//       wannaListenAlbums {
+//         id
+//         albumName
+//         artistName
+//         albumPic
+//         releaseDate
+//         # Add any additional fields you need from the wannaListenAlbums
+//         # ...
+//       }
+//       reviews {
+//         id
+//         albumName
+//         reviewText
+//       }
+//       followers {
+//         id
+//         username
+//       }
+//       following {
+//         id
+//         username
+//       }
+//   }
+// }
+// `;
  
 export const QUERY_REVIEWS = gql`
   query {
