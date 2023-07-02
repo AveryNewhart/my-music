@@ -2,7 +2,9 @@ import React from 'react';
 import { useQuery } from '@apollo/client';
 import { QUERY_REVIEWS } from '../utils/queries';
 import Navigation from '../components/Navigation';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate} from 'react-router-dom';
+import "../styles/Feed.css";
+
 
 // riley was here
 
@@ -34,24 +36,29 @@ const Feed = () => {
   console.log('sortedReviews:', sortedReviews);
 
   return (
-    <div>
-      <Navigation />
-      <h1>Feed Page</h1>
-      <ul>
-        {sortedReviews.length > 0 ? (
-          sortedReviews.reverse().map((review, index) => (
-            <li key={index}>
-              {/* <h2>{review.username}</h2> */}
-              <button onClick={() => navigate(`/anyprofile/${review.username}`)}>{review.username}</button>
-              <p>Album: {review.albumName}</p>
-              <p>Review: {review.reviewText}</p>
-            </li>
-          ))
-        ) : (
-          <p>No posts found.</p>
-        )}
-      </ul>
-    </div>
+<div>
+  <Navigation />
+  <div className="feed-container">
+  <h1>Feed Page</h1>
+  <ul>
+    {sortedReviews.length > 0 ? (
+      sortedReviews.reverse().map((review, index) => (
+        <li key={index} className="post-container">
+          {/* <h2>{review.username}</h2> */}
+          <button onClick={() => navigate(`/anyprofile/${review.username}`)}>
+            {review.username}
+          </button>
+          <p>Album: {review.albumName}</p>
+          <p>Review: {review.reviewText}</p>
+        </li>
+      ))
+    ) : (
+      <p>No posts found.</p>
+    )}
+  </ul>
+  </div>
+</div>
+
   );
 };
 
