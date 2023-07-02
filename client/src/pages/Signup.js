@@ -91,12 +91,12 @@ const Signup = () => {
 
         <MDBCol md='6' className='text-center text-md-start d-flex flex-column justify-content-center'>
 
-          <h1 className="my-5 display-3 fw-bold ls-tight px-3" style={{color: 'hsl(218, 81%, 95%)'}}>
+          <h1 className="my-5 display-3 fw-bold ls-tight px-3 fontSign" style={{color: '#001233'}}>
             Welcome To, <br />
-            <span style={{color: 'hsl(218, 81%, 75%)'}}>My Music</span>
+            <span className="fontSign" style={{color: 'hsl(263, 87%, 35%)'}}>My Music</span>
           </h1>
 
-          <p className='px-3' style={{color: 'hsl(218, 81%, 85%)'}}>
+          <p className='px-3 fontPar' style={{color: '#001233'}}>
           Are you ready for a music experience like no other?
           With My Music, you can search up your favorite artists and dive deep into their album data. 
           Save albums to your listened or wanna listen categories, then you can share your thoughts with the world by posting your reviews on our vibrant feed. 
@@ -111,28 +111,28 @@ const Signup = () => {
           <div id="radius-shape-1" className="position-absolute rounded-circle shadow-5-strong"></div>
           <div id="radius-shape-2" className="position-absolute shadow-5-strong"></div>
 
-          <MDBCard className='my-5 bg-glass'>
+          <MDBCard className='my-5' style={{borderRadius: '5%', backgroundColor: "#001233"}}>
           {/* <form onSubmit={handleFormSubmit}> */}
             <MDBCardBody className='p-5'>
             <form onSubmit={handleFormSubmit}>
 
-                <MDBInput label='Username' type='text'  id='formControlDefault' 
+                <MDBInput labelClass='loginLabel' label='Username' type='text'  id='formControlDefault' 
                 // value={userFormData.username} 
                 onChange={handleInputChange}
                 name="username"
                  />
-                <MDBInput  label='Email' type='text' id='formControlDefault' 
+                <MDBInput  labelClass='loginLabel' label='Email' type='text' id='formControlDefault' 
                 // value={userFormData.email} 
                 onChange={handleInputChange} 
                 name="email"
                  />
-                <MDBInput label='Password' type='text' id='formControlDefault' 
+                <MDBInput labelClass='loginLabel' label='Password' type='text' id='formControlDefault' 
                 // value={userFormData.password}
                 onChange={handleInputChange}
                 name="password" 
                  />
 
-              <MDBBtn className='w-100 mb-4' size='md' type='submit' >sign up</MDBBtn>
+              <MDBBtn className='w-100 mb-4 loginButton' size='md' type='submit' >Sign up</MDBBtn>
 
               {/* <div className="text-center">
 
@@ -143,10 +143,10 @@ const Signup = () => {
                 </MDBBtn>
 
               </div> */}
-                <div>
-                  <p className="mb-0 centerLogin">Already have an account? <a href="/login" className="text-black-50 fw-bold">Login</a></p>
+                 <div>
+                  <p className="mb-0 centerLogin loginLabel">Don't have an account? <a href="/signup" className="fw-bold">Login</a></p>
                   <br/>
-                  <p className="mb-0 centerLogin">Return home? <a href="/" className="text-black-50 fw-bold">Home</a></p>
+                  <p className="mb-0 centerLogin loginLabel">Return home? <a href="/" className="fw-bold">Home</a></p>
                 </div>
               </form>
             </MDBCardBody>

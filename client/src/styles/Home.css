@@ -11,7 +11,7 @@
   
   .home-head {
     font-size: 3.5rem;
-    margin-top: -14rem;
+    margin-top: -13rem;
     margin-bottom: 4rem;
     color: #5bc0be;
     /* border-bottom: 5px solid hsl(263, 87%, 35%); */
@@ -27,6 +27,7 @@
     color: #001233;
     border-bottom: 3.5px solid hsl(263, 87%, 35%);
     font-family: 'Zen Dots';
+    text-align: center;
   }
   
   .home-subtitle {
@@ -34,8 +35,9 @@
     margin-bottom: 1rem;
     margin-top: 2rem;
     color: #001233;
-    border-bottom: 1.5px solid hsl(263, 87%, 35%);
+    /* border-bottom: 1.5px solid hsl(263, 87%, 35%); */
     font-family: 'Zen Dots';
+    text-align: center;
   }
 
   
