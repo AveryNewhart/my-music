@@ -9,7 +9,7 @@ import {
     MDBCard,
     MDBCardBody,
     MDBInput,
-    MDBIcon
+    // MDBIcon
   }
   from 'mdb-react-ui-kit';
   import {  Alert } from "react-bootstrap";
@@ -94,7 +94,7 @@ const Login = () => {
               <MDBCardBody className='p-5 d-flex flex-column align-items-center mx-auto w-100'>
               <form onSubmit={handleFormSubmit}>
   
-                <h2 className="fw-bold mb-2 text-uppercase">Login</h2>
+                <h2 className="fw-bold mb-2 text-uppercase centerLogin">Login</h2>
                 <p className="text-white-50 mb-5">Please enter your login and password!</p>
 
                 <MDBInput labelClass='text-white' label='Email address' 
@@ -115,15 +115,15 @@ const Login = () => {
                 </MDBBtn> */}
                   <MDBBtn className='w-100 mb-4' size='md' type='submit' >Login</MDBBtn>
   
-                <div className='d-flex flex-row mt-3 mb-5'>
+                {/* <div className='d-flex flex-row mt-3 mb-5'>
   
                   <MDBBtn tag='a' color='none' className='m-3' style={{ color: 'white' }}>
                     <MDBIcon fab icon='google' size="lg"/>
                   </MDBBtn>
-                </div>
+                </div> */}
   
                 <div>
-                  <p className="mb-0">Don't have an account? <a href="/signup" className="text-white-50 fw-bold">Sign Up</a></p>
+                  <p className="mb-0 centerLogin">Don't have an account? <a href="/signup" className="text-white-50 fw-bold">Sign Up</a></p>
   
                 </div>
                 </form>
