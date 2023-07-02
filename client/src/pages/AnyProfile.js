@@ -1,12 +1,27 @@
 import React, { useState, useEffect } from 'react';
+import {
+  MDBCard,
+  MDBCardBody,
+  MDBCardText,
+  MDBCardImage
+} from 'mdb-react-ui-kit';
 import { useQuery, useMutation } from '@apollo/client';
 import { useParams } from 'react-router-dom';
 import { QUERY_USER } from '../utils/queries';
 import { ADD_FOLLOWER } from '../utils/mutations';
 import Navigation from "../components/Navigation.js";
+import { Modal, ModalHeader, ModalBody, ModalFooter } from 'react-bootstrap';
+import "../styles/UserCard.css"
+import DeafultPic from "../images/defaultprof.png"
 
 const AnyProfile = () => {
     const { username } = useParams();
+
+      // eslint-disable-next-line
+  const [activeTab, setActiveTab] = useState('followers');
+  const [activeSection, setActiveSection] = useState('listened');
+  const [followersModalOpen, setFollowersModalOpen] = useState(false);
+  const [followingModalOpen, setFollowingModalOpen] = useState(false);
   
     // Query user data using QUERY_USER
     const { loading, error, data, refetch } = useQuery(QUERY_USER, {
@@ -19,6 +34,16 @@ const AnyProfile = () => {
   const [user, setUser] = useState(null);
     // State to track if the user is already being followed
     const [isFollowing, setIsFollowing] = useState(false);
+
+    const handleTabClick = (tabName) => {
+      setActiveTab(tabName);
+     
+      if (tabName === 'followers') {
+        setFollowersModalOpen(true);
+      } else if (tabName === 'following') {
+        setFollowingModalOpen(true);
+      }
+    };
 
     // Use useEffect to update the user state when the data changes
     useEffect(() => {
@@ -73,74 +98,161 @@ const AnyProfile = () => {
         }
       };
 
+      // {isFollowing ? (
+      //   <button disabled>Following</button>
+      // ) : (
+      //   <button onClick={handleFollow}>Follow</button>
+      // )}
+
       return (
-        <div>
-          <Navigation />
-          {/* Display user data */}
-          <h1>{user?.username}</h1>
-          {isFollowing ? (
-        <button disabled>Following</button>
-      ) : (
+        <>
+        <Navigation/>
+        <MDBCard className="card-container">
+        <MDBCardBody>
+                <div className="profile-section">
+            <MDBCardImage   
+              src={user.profilePicture || DeafultPic}
+              alt="Profile Picture"
+              position="top"
+              className="profile-picture"
+            />
+            <MDBCardText className="usernameArea">
+              {user.username || "User Name"}
+            </MDBCardText>
+             {isFollowing ? (
+         <button disabled>Following</button>
+       ) : (
         <button onClick={handleFollow}>Follow</button>
-      )}
-               <div className="section">
-          <h3>Followers</h3>
-          <p>{user.followers.length}</p>
-        </div>
-        <div className="section">
-          <h3>Following</h3>
-          <p>{user.following.length}</p>
-        </div>
-          {/* <button onClick={handleFollow}>Follow</button> */}
-          {/* <div className="section">
-            <h3>Followers</h3>
-            {user?.followers.map((follower) => (
-              <h3 key={follower._id}>{follower.username}</h3>
-            ))}
-          </div>
-          <div className="section">
-            <h3>Following</h3>
-            {user?.following.map((followingUser) => (
-              <h3 key={followingUser._id}>{followingUser.username}</h3>
-            ))}
-          </div> */}
-          <div className="section">
-            <h3>Listened Albums</h3>
-            {user?.listenedAlbums.map((album) => (
-              <div key={album.id} className="album">
-                <img src={album.albumPic} alt="" className="coverArt" />
-                <p>Artist: {album.artistName}</p>
-                <p>Album: {album.albumName}</p>
-                <p>Release Date: {album.releaseDate}</p>
+       )}
+            <div className="followers-following">
+              <div className="section">
+                <h3>Followers</h3>
+                <p>
+                  <button
+                    className="link-button"
+                    onClick={() => handleTabClick("followers")}
+                  >
+                    {user.followers.length}
+                  </button>
+                </p>
               </div>
-            ))}
+              <div className="section">
+                <h3>Following</h3>
+                <p>
+                  <button
+                    className="link-button"
+                    onClick={() => handleTabClick("following")}
+                  >
+                    {user.following.length}
+                  </button>
+                </p>
+              </div>
+            </div>
           </div>
+                      {/* Buttons for each section */}
+            <div className="section-buttons">
+              <button onClick={() => setActiveSection("listened")}>Listened Albums</button>
+              <button onClick={() => setActiveSection("wannaListen")}>Wanna Listen Albums</button>
+              <button onClick={() => setActiveSection("reviews")}>Reviews</button>
+            </div>
       
-          <div className="section">
-            <h3>Wanna Listen Albums</h3>
-            {user?.wannaListenAlbums.map((album) => (
-              <div key={album.id} className="album">
-                <img src={album.albumPic} alt="" className="coverArt" />
-                <p>Artist: {album.artistName}</p>
-                <p>Album: {album.albumName}</p>
-                <p>Release Date: {album.releaseDate}</p>
+      {/* Listened Albums */}
+      <div className={`section ${activeSection === "listened" ? "active" : ""}`}>
+              {activeSection === "listened" && <h3>Listened Albums</h3>}
+              <div className="album-list">
+                {activeSection === "listened" &&
+                  user.listenedAlbums.map((album, index) => (
+                    <div key={index} className="album">
+                      <img src={album.albumPic} alt="" className="coverArt" />
+                      <p>Artist: {album.artistName}</p>
+                      <p>Album: {album.albumName}</p>
+                      <p>Release Date: {album.releaseDate}</p>
+                    </div>
+                  ))}
               </div>
-            ))}
-          </div>
+            </div>
       
-          <div className="section">
-            <h3>Reviews</h3>
-            {user?.reviews.map((review) => (
-              <div key={review.id} className="review">
-                <p>Album: {review.albumName}</p>
-                <p>Review: {review.reviewText}</p>
+          {/* Wanna Listen Albums */}
+          <div className={`section ${activeSection === "wannaListen" ? "active" : ""}`}>
+              {activeSection === "wannaListen" && <h3>Wanna Listen Albums</h3>}
+              <div className="album-list">
+                {activeSection === "wannaListen" &&
+                  user.wannaListenAlbums.map((album, index) => (
+                    <div key={index} className="album">
+                      <img src={album.albumPic} alt="" className="coverArt" />
+                      <p>Artist: {album.artistName}</p>
+                      <p>Album: {album.albumName}</p>
+                      <p>Release Date: {album.releaseDate}</p>
+                    </div>
+                  ))}
               </div>
-            ))}
-          </div>
-          {/* Other user data you want to display */}
-        </div>
-      );
-  };
+            </div>
+      
+      
+          {/* Reviews */}
+          <div className={`section ${activeSection === "reviews" ? "active" : ""}`}>
+              {activeSection === "reviews" && <h3>Reviews</h3>}
+              <div className="album-list">
+                {activeSection === "reviews" &&
+                  user.reviews.map((review, index) => (
+                    <div key={index} className="album">
+                      <p>Album: {review.albumName}</p>
+                      <p>Review: {review.reviewText}</p>
+                    </div>
+                  ))}
+              </div>
+            </div>
+            
+              <Modal show={followersModalOpen} onHide={() => setFollowersModalOpen(false)} className="custom-modal">
+              <ModalHeader closeButton>
+                Followers
+              </ModalHeader>
+              <ModalBody>
+                {user.followers.length > 0 ? (
+                  <div className="user-list">
+                {user.followers.map((user, index) => (
+                  <h3 key={index}>{user.username}</h3>
+                    ))}
+                  </div>
+                ) : (
+                  <p>No followers found.</p>
+                )}
+              </ModalBody>
+              <ModalFooter>
+                <button className="btn btn-secondary" onClick={() => setFollowersModalOpen(false)}>
+                  Close
+                </button>
+              </ModalFooter>
+            </Modal>
+      
+            {/* Following Modal */}
+            <Modal show={followingModalOpen} onHide={() => setFollowingModalOpen(false)} className="custom-modal">
+              <ModalHeader closeButton>
+                Following
+              </ModalHeader>
+              <ModalBody>
+                {user.following.length > 0 ? (
+                  <div className="user-list">
+                    {user.following.map((user, index) => (
+                      <h3 key={index}>{user.username}</h3>
+                    ))}
+                  </div>
+                ) : (
+                  <p>No following found.</p>
+                )}
+              </ModalBody>
+              <ModalFooter>
+                <button className="btn btn-secondary" onClick={() => setFollowingModalOpen(false)}>
+                  Close
+                </button>
+              </ModalFooter>
+            </Modal>
+        </MDBCardBody>
+        {/* </div> */}
+      </MDBCard>
+      </>
+          );
+        }
   
   export default AnyProfile;
   

@@ -100,51 +100,53 @@ const UserCard = () => {
         <button onClick={() => setActiveSection("reviews")}>Reviews</button>
       </div>
 
-    {/* Listened Albums */}
-    <div className={`section ${activeSection === "listened" ? "active" : ""}`}>
-  <h3>Listened Albums</h3>
-  <div className="album-list">
-    {activeSection === "listened" &&
-      user.listenedAlbums.map((album, index) => (
-        <div key={index} className="album">
-          <img src={album.albumPic} alt="" className="coverArt" />
-          <p>Artist: {album.artistName}</p>
-          <p>Album: {album.albumName}</p>
-          <p>Release Date: {album.releaseDate}</p>
+{/* Listened Albums */}
+<div className={`section ${activeSection === "listened" ? "active" : ""}`}>
+        {activeSection === "listened" && <h3>Listened Albums</h3>}
+        <div className="album-list">
+          {activeSection === "listened" &&
+            user.listenedAlbums.map((album, index) => (
+              <div key={index} className="album">
+                <img src={album.albumPic} alt="" className="coverArt" />
+                <p>Artist: {album.artistName}</p>
+                <p>Album: {album.albumName}</p>
+                <p>Release Date: {album.releaseDate}</p>
+              </div>
+            ))}
         </div>
-      ))}
-  </div>
-</div>
+      </div>
 
     {/* Wanna Listen Albums */}
     <div className={`section ${activeSection === "wannaListen" ? "active" : ""}`}>
-  <h3>Wanna Listen Albums</h3>
-  <div className="album-list">
-    {activeSection === "wannaListen" &&
-      user.wannaListenAlbums.map((album, index) => (
-        <div key={index} className="album">
-          <img src={album.albumPic} alt="" className="coverArt" />
-          <p>Artist: {album.artistName}</p>
-          <p>Album: {album.albumName}</p>
-          <p>Release Date: {album.releaseDate}</p>
+        {activeSection === "wannaListen" && <h3>Wanna Listen Albums</h3>}
+        <div className="album-list">
+          {activeSection === "wannaListen" &&
+            user.wannaListenAlbums.map((album, index) => (
+              <div key={index} className="album">
+                <img src={album.albumPic} alt="" className="coverArt" />
+                <p>Artist: {album.artistName}</p>
+                <p>Album: {album.albumName}</p>
+                <p>Release Date: {album.releaseDate}</p>
+              </div>
+            ))}
         </div>
-      ))}
-  </div>
-</div>
+      </div>
+
 
     {/* Reviews */}
     <div className={`section ${activeSection === "reviews" ? "active" : ""}`}>
-  <h3>Listened Albums</h3>
-  <div className="album-list">
-    {activeSection === "reviews" &&
-      user.reviews.map((review, index) => (
-        <div key={index} className="album">
-          <p>Album: {review.albumName}</p>
-          <p>Review: {review.reviewText}</p>
+        {activeSection === "reviews" && <h3>Reviews</h3>}
+        <div className="album-list">
+          {activeSection === "reviews" &&
+            user.reviews.map((review, index) => (
+              <div key={index} className="album">
+                <p>Album: {review.albumName}</p>
+                <p>Review: {review.reviewText}</p>
+              </div>
+            ))}
         </div>
-      ))}
-  </div>
-</div>
+      </div>
+      
         <Modal show={followersModalOpen} onHide={() => setFollowersModalOpen(false)} className="custom-modal">
         <ModalHeader closeButton>
           Followers
