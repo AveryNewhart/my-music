@@ -22,6 +22,7 @@ const UserCard = () => {
 
   // eslint-disable-next-line
   const [activeTab, setActiveTab] = useState('followers');
+  const [activeSection, setActiveSection] = useState('listened');
   const [followersModalOpen, setFollowersModalOpen] = useState(false);
   const [followingModalOpen, setFollowingModalOpen] = useState(false);
 
@@ -38,7 +39,7 @@ const UserCard = () => {
 
    const handleTabClick = (tabName) => {
     setActiveTab(tabName);
-  
+   
     if (tabName === 'followers') {
       setFollowersModalOpen(true);
     } else if (tabName === 'following') {
@@ -55,43 +56,96 @@ const UserCard = () => {
 
     return (
   <MDBCard className="card-container">
-    {/* <div className="card-container"> */}
-  <MDBCardImage   
-  src={user.profilePicture || DeafultPic }
-  alt='...'
-  position='top'
-  className='profile-picture' />
   <MDBCardBody>
-    <MDBCardText className='usernameArea'>
-    {user.username || 'User Name'}
-    </MDBCardText>
-          <ProfilePicture />
-          <div className="section">
+          <div className="profile-section">
+      <MDBCardImage   
+        src={user.profilePicture || DeafultPic}
+        alt="Profile Picture"
+        position="top"
+        className="profile-picture"
+      />
+      <ProfilePicture />
+      <MDBCardText className="usernameArea">
+        {user.username || "User Name"}
+      </MDBCardText>
+      <div className="followers-following">
+        <div className="section">
           <h3>Followers</h3>
           <p>
             <button
               className="link-button"
-              onClick={() => handleTabClick('followers')}
+              onClick={() => handleTabClick("followers")}
             >
               {user.followers.length}
             </button>
           </p>
-          {/* <p>{user.followers.length}</p> */}
         </div>
         <div className="section">
           <h3>Following</h3>
           <p>
             <button
               className="link-button"
-              onClick={() => handleTabClick('following')}
+              onClick={() => handleTabClick("following")}
             >
               {user.following.length}
             </button>
           </p>
-          {/* <p>{user.following.length}</p> */}
         </div>
-                {/* Followers Modal */}
-      <Modal show={followersModalOpen} onHide={() => setFollowersModalOpen(false)}>
+      </div>
+    </div>
+                {/* Buttons for each section */}
+      <div className="section-buttons">
+        <button onClick={() => setActiveSection("listened")}>Listened Albums</button>
+        <button onClick={() => setActiveSection("wannaListen")}>Wanna Listen Albums</button>
+        <button onClick={() => setActiveSection("reviews")}>Reviews</button>
+      </div>
+
+    {/* Listened Albums */}
+    <div className={`section ${activeSection === "listened" ? "active" : ""}`}>
+  <h3>Listened Albums</h3>
+  <div className="album-list">
+    {activeSection === "listened" &&
+      user.listenedAlbums.map((album, index) => (
+        <div key={index} className="album">
+          <img src={album.albumPic} alt="" className="coverArt" />
+          <p>Artist: {album.artistName}</p>
+          <p>Album: {album.albumName}</p>
+          <p>Release Date: {album.releaseDate}</p>
+        </div>
+      ))}
+  </div>
+</div>
+
+    {/* Wanna Listen Albums */}
+    <div className={`section ${activeSection === "wannaListen" ? "active" : ""}`}>
+  <h3>Wanna Listen Albums</h3>
+  <div className="album-list">
+    {activeSection === "wannaListen" &&
+      user.wannaListenAlbums.map((album, index) => (
+        <div key={index} className="album">
+          <img src={album.albumPic} alt="" className="coverArt" />
+          <p>Artist: {album.artistName}</p>
+          <p>Album: {album.albumName}</p>
+          <p>Release Date: {album.releaseDate}</p>
+        </div>
+      ))}
+  </div>
+</div>
+
+    {/* Reviews */}
+    <div className={`section ${activeSection === "reviews" ? "active" : ""}`}>
+  <h3>Listened Albums</h3>
+  <div className="album-list">
+    {activeSection === "reviews" &&
+      user.reviews.map((review, index) => (
+        <div key={index} className="album">
+          <p>Album: {review.albumName}</p>
+          <p>Review: {review.reviewText}</p>
+        </div>
+      ))}
+  </div>
+</div>
+        <Modal show={followersModalOpen} onHide={() => setFollowersModalOpen(false)} className="custom-modal">
         <ModalHeader closeButton>
           Followers
         </ModalHeader>
@@ -114,7 +168,7 @@ const UserCard = () => {
       </Modal>
 
       {/* Following Modal */}
-      <Modal show={followingModalOpen} onHide={() => setFollowingModalOpen(false)}>
+      <Modal show={followingModalOpen} onHide={() => setFollowingModalOpen(false)} className="custom-modal">
         <ModalHeader closeButton>
           Following
         </ModalHeader>
@@ -135,39 +189,6 @@ const UserCard = () => {
           </button>
         </ModalFooter>
       </Modal>
-        <div className="section">
-          <h3>Listened Albums</h3>
-          {user.listenedAlbums.map((album, index) => (
-            <div key={index} className="album">
-              <img src={album.albumPic} alt="" className="coverArt" />
-              <p>Artist: {album.artistName}</p>
-              <p>Album: {album.albumName}</p>
-              <p>Release Date: {album.releaseDate}</p>
-            </div>
-          ))}
-        </div>
-
-        <div className="section">
-          <h3>Wanna Listen Albums</h3>
-          {user.wannaListenAlbums.map((album, index) => (
-            <div key={index} className="album">
-              <img src={album.albumPic} alt="" className="coverArt" />
-              <p>Artist: {album.artistName}</p>
-              <p>Album: {album.albumName}</p>
-              <p>Release Date: {album.releaseDate}</p>
-            </div>
-          ))}
-        </div>
-
-        <div className="section">
-          <h3>Reviews</h3>
-          {user.reviews.map((review, index) => (
-            <div key={index} className="review">
-              <p>Album: {review.albumName}</p>
-              <p>Review: {review.reviewText}</p>
-            </div>
-          ))}
-        </div>
   </MDBCardBody>
   {/* </div> */}
 </MDBCard>
