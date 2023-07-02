@@ -83,6 +83,14 @@ const AnyProfile = () => {
       ) : (
         <button onClick={handleFollow}>Follow</button>
       )}
+               <div className="section">
+          <h3>Followers</h3>
+          <p>{user.followers.length}</p>
+        </div>
+        <div className="section">
+          <h3>Following</h3>
+          <p>{user.following.length}</p>
+        </div>
           {/* <button onClick={handleFollow}>Follow</button> */}
           {/* <div className="section">
             <h3>Followers</h3>

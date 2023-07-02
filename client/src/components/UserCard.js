@@ -54,22 +54,16 @@ const UserCard = () => {
           <ProfilePicture />
           <div className="section">
           <h3>Followers</h3>
-          {/*might not have to do map, might have to do it another way so it doesnt show all users, just a number  */}
-          {user.followers.map((user) => (
-            <h3>{user.username}</h3>
-          ))}
+          <p>{user.followers.length}</p>
         </div>
         <div className="section">
           <h3>Following</h3>
-           {/*might not have to do map, might have to do it another way so it doesnt show all users, just a number  */}
-          {user.following.map((user) => (
-            <h3>{user.username}</h3>
-          ))}
+          <p>{user.following.length}</p>
         </div>
         <div className="section">
           <h3>Listened Albums</h3>
-          {user.listenedAlbums.map((album) => (
-            <div key={album.id} className="album">
+          {user.listenedAlbums.map((album, index) => (
+            <div key={index} className="album">
               <img src={album.albumPic} alt="" className="coverArt" />
               <p>Artist: {album.artistName}</p>
               <p>Album: {album.albumName}</p>
@@ -80,8 +74,8 @@ const UserCard = () => {
 
         <div className="section">
           <h3>Wanna Listen Albums</h3>
-          {user.wannaListenAlbums.map((album) => (
-            <div key={album.id} className="album">
+          {user.wannaListenAlbums.map((album, index) => (
+            <div key={index} className="album">
               <img src={album.albumPic} alt="" className="coverArt" />
               <p>Artist: {album.artistName}</p>
               <p>Album: {album.albumName}</p>
@@ -92,8 +86,8 @@ const UserCard = () => {
 
         <div className="section">
           <h3>Reviews</h3>
-          {user.reviews.map((review) => (
-            <div key={review.id} className="review">
+          {user.reviews.map((review, index) => (
+            <div key={index} className="review">
               <p>Album: {review.albumName}</p>
               <p>Review: {review.reviewText}</p>
             </div>

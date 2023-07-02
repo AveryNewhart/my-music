@@ -10,7 +10,9 @@ const { User, Album, Review } = require("../models"); //we don't need to do the 
 const resolvers = {
   Query: {
     user: async (parent, { username }, context) => {
-      return await User.findOne({ username });
+      return await User.findOne({ username })
+      .populate("following")
+      .populate("followers");
     },
     // users: async (_, __, context) => {
     //   return await User.find();
