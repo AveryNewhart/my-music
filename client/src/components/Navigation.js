@@ -6,7 +6,7 @@ import "../styles/Nav.css";
 import Auth from '../utils/auth';
 import SearchForm from "./SearchForm";
 // import SearchResultsPage from "../pages/SearchResultsPage";
-
+ 
 export default function Navigation() {
     const handleLogout = () => {
         Auth.logout();

@@ -70,11 +70,12 @@ const SearchForm = ({ onSearch }) => {
   };
 
   return (
-    <div>
+    <div style={{ display: 'flex', alignItems: 'center' }}>
             <input
         type="text"
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
+        style={{ marginRight: '10px' }}
       />
         {/* {searchInput && suggestions.length > 0 && (
   <ul>
@@ -85,7 +86,7 @@ const SearchForm = ({ onSearch }) => {
     ))}
   </ul>
 )} */}
-      <button onClick={handleSearch}>Search</button>
+      <button className="profBut searchBut" onClick={handleSearch}>Search</button>
     </div>
   );
 };

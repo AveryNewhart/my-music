@@ -122,7 +122,7 @@ const AnyProfile = () => {
              {isFollowing ? (
          <button disabled>Following</button>
        ) : (
-        <button className="profBut" onClick={handleFollow}>Follow</button>
+        <button className="profBut followBut" onClick={handleFollow}>Follow</button>
        )}
             <div className="followers-following">
               <div className="section">

@@ -100,6 +100,11 @@ button.profBut:hover {
   color: hsl(263, 87%, 35%);
 }
 
+.followBut {
+  font-family: "Zen Dots";
+  border-radius: 10%;
+}
+
 /* div.section-buttons {
   display: flex;
   justify-content: space-between;

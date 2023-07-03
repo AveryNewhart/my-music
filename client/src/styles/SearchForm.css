@@ -13,5 +13,9 @@
 .albumInside {
     text-align: center;
 } */
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Metal+Mania&family=Rubik+Puddles&family=Zen+Dots&display=swap');
 
+.searchBut {
+    font-family: "Rubik Puddles";
+}
   
