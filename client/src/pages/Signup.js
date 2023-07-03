@@ -144,7 +144,7 @@ const Signup = () => {
 
               </div> */}
                  <div>
-                  <p className="mb-0 centerLogin loginLabel">Don't have an account? <a href="/signup" className="fw-bold">Login</a></p>
+                  <p className="mb-0 centerLogin loginLabel">Don't have an account? <a href="/login" className="fw-bold">Login</a></p>
                   <br/>
                   <p className="mb-0 centerLogin loginLabel">Return home? <a href="/" className="fw-bold">Home</a></p>
                 </div>
