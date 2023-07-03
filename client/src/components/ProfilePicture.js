@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { useMutation } from "@apollo/client";
 import { ADD_PROFILE_PICTURE } from "../utils/mutations";
 import auth from "../utils/auth";
+import "../styles/UserCard.css"
 
 export default function ProfilePicture() {
   const [formState, setFormState] = useState({
@@ -72,7 +73,7 @@ export default function ProfilePicture() {
           onDone={({ base64 }) => handleFileUpload(base64)}
         />
       </div>
-      <button className="">Upload Profile Picture</button>
+      <button className="profBut">Upload Profile Picture</button>
     </form>
   );
 }

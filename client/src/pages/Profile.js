@@ -17,7 +17,7 @@ const Profile = () => {
     return (
       <div className=''>
         <Navigation />
-    <div className=''>
+    <div>
       <UserCard />
     </div>
       {/* <div>

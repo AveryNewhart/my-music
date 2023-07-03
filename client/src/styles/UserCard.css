@@ -1,44 +1,18 @@
-/* .profile-picture {
-    max-width: 100px; 
-    height: auto;
-  }
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Metal+Mania&family=Prompt:wght@300&family=Rubik+Puddles&family=Zen+Dots&display=swap');
 
 div.card.card-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    background-color: #5bc0be;
-    margin-top: 15px;
-    margin-left: 40vw;
-    margin-right: 40vw;
-    border-radius: 10px;
-    border: 2px solid hsl(263, 87%, 35%);
-  }
-
- .usernameArea {
-    color: #5bc0be;
- }
-
- div.card-body {
-    background-color: #001233;
-    border-radius: 10px;
-    margin-bottom: 5px;
-    border: 2px solid hsl(263, 87%, 35%);
- } */
- /* Add these CSS styles to your existing stylesheet or create a new one */
-
-.card-container {
    display: flex;
    flex-direction: column;
    align-items: center;
    justify-content: center;
    text-align: center;
+   background-color: #5bc0be;
  }
 
  .followers-following {
    display: flex;
    justify-content: space-between;
+   font-family: "Zen Dots";
  }
  
  .profile-picture {
@@ -49,6 +23,7 @@ div.card.card-container {
  .usernameArea {
    font-size: 18px;
    font-weight: bold;
+   font-family: "Zen Dots";
  }
  
  .section {
@@ -56,8 +31,10 @@ div.card.card-container {
  }
  
  .section h3 {
-   font-size: 16px;
+   font-size: 23px;
    font-weight: bold;
+   font-family: "Zen Dots";
+   margin-top: 10px;
  }
  
  .section p {
@@ -79,6 +56,10 @@ div.card.card-container {
    margin-bottom: 10px;
  }
 
+.album-list {
+  max-width: 400px;
+}
+
  .custom-modal {
    display: flex ;
    align-items: center;
@@ -99,6 +80,55 @@ div.card.card-container {
  .custom-modal .modal-content {
    border-radius: 0;
  }
+ 
+ /* div.section-buttons {
+  display: flex;
+  justify-content: space-between;
+} */
+
+
+ button.profBut {
+  background: hsl(263, 87%, 35%);
+  border: none;
+  color: #5bc0be;
+  border-radius: 5%;
+}
+
+button.profBut:hover {
+  box-shadow: 0 0 5px hsl(263, 87%, 35%), 0 0 25px hsl(263, 87%, 35%), 0 0 50px hsl(263, 87%, 35%);
+  background-color: #5bc0be;
+  color: hsl(263, 87%, 35%);
+}
+
+/* div.section-buttons {
+  display: flex;
+  justify-content: space-between;
+} */
+.section-buttons {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-gap: 10px;
+  font-family: "Zen Dots";
+}
+
+.musicText {
+  font-size: 1.25rem;
+  color: #001233;
+  font-weight: bold;
+  font-family: "Zen Dots";
+}
+
+.reviewDiv {
+  border: 2px solid hsl(263, 87%, 35%);
+  padding: 10px;
+  border-radius: 5%;
+}
+
+.reviewText {
+  font-family: "Prompt";
+  font-weight: bold;
+}
+
  
  
  /* Media queries for mobile responsiveness */

@@ -12,7 +12,7 @@ import { useQuery } from '@apollo/client';
 import { QUERY_PROTECTED } from "../utils/queries";
 import ProfilePicture from '../components/ProfilePicture';
 import "../styles/UserCard.css";
-import DeafultPic from "../images/defaultprof.png"
+import DeafultPic from "../images/defaultprof.png" 
 
 
 
@@ -73,7 +73,7 @@ const UserCard = () => {
           <h3>Followers</h3>
           <p>
             <button
-              className="link-button"
+              className="link-button profBut"
               onClick={() => handleTabClick("followers")}
             >
               {user.followers.length}
@@ -84,7 +84,7 @@ const UserCard = () => {
           <h3>Following</h3>
           <p>
             <button
-              className="link-button"
+              className="link-button profBut"
               onClick={() => handleTabClick("following")}
             >
               {user.following.length}
@@ -95,9 +95,9 @@ const UserCard = () => {
     </div>
                 {/* Buttons for each section */}
       <div className="section-buttons">
-        <button onClick={() => setActiveSection("listened")}>Listened Albums</button>
-        <button onClick={() => setActiveSection("wannaListen")}>Wanna Listen Albums</button>
-        <button onClick={() => setActiveSection("reviews")}>Reviews</button>
+        <button className="profBut" onClick={() => setActiveSection("listened")}>Listened Albums</button>
+        <button className="profBut" onClick={() => setActiveSection("wannaListen")}>Wanna Listen Albums</button>
+        <button className="profBut" onClick={() => setActiveSection("reviews")}>Reviews</button>
       </div>
 
 {/* Listened Albums */}
@@ -108,9 +108,9 @@ const UserCard = () => {
             user.listenedAlbums.map((album, index) => (
               <div key={index} className="album">
                 <img src={album.albumPic} alt="" className="coverArt" />
-                <p>Artist: {album.artistName}</p>
-                <p>Album: {album.albumName}</p>
-                <p>Release Date: {album.releaseDate}</p>
+                <p className='musicText'>Artist: {album.artistName}</p>
+                <p className='musicText'>Album: {album.albumName}</p>
+                <p className='musicText'>Release Date: {album.releaseDate}</p>
               </div>
             ))}
         </div>
@@ -124,9 +124,9 @@ const UserCard = () => {
             user.wannaListenAlbums.map((album, index) => (
               <div key={index} className="album">
                 <img src={album.albumPic} alt="" className="coverArt" />
-                <p>Artist: {album.artistName}</p>
-                <p>Album: {album.albumName}</p>
-                <p>Release Date: {album.releaseDate}</p>
+                <p className='musicText'>Artist: {album.artistName}</p>
+                <p className='musicText'>Album: {album.albumName}</p>
+                <p className='musicText'>Release Date: {album.releaseDate}</p>
               </div>
             ))}
         </div>
@@ -139,9 +139,9 @@ const UserCard = () => {
         <div className="album-list">
           {activeSection === "reviews" &&
             user.reviews.map((review, index) => (
-              <div key={index} className="album">
-                <p>Album: {review.albumName}</p>
-                <p>Review: {review.reviewText}</p>
+              <div key={index} className="album reviewDiv">
+                <p className='musicText'>Album: {review.albumName}</p>
+                <p className='reviewText'>Review: {review.reviewText}</p>
               </div>
             ))}
         </div>
