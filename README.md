@@ -1,6 +1,10 @@
 # MY-MUSIC
 
-- description goes here
+- Are you ready for a music experience like no other?
+  With My Music, you can search up your favorite artists and dive deep into their album data. 
+  Save albums to your listened or wanna listen categories, then you can share your thoughts with the world by posting your reviews on our vibrant feed. 
+  Connect with fellow music lovers by exploring their profiles and hit that follow button! 
+  Get ready to unleash your passion for music with My Music.
 
 
 # Badges
@@ -42,7 +46,7 @@ You can use npm run seed, or npm start
 
 # Usage
 
-- link and ss
+- https://my-music-4e69cad2a89f.herokuapp.com/
 
 ## Questions
 
