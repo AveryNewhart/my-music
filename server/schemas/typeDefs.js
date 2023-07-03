@@ -83,8 +83,8 @@ const typeDefs = gql`
     saveToListened(album: AlbumInput): User
     saveToWannaListen(album: AlbumInput): User
     addFollower(id: ID!): User
-    removeWannaListenAlbum(id: ID!): User
-    removeListenedAlbum(id: ID!): User
+    # removeWannaListenAlbum(id: ID!): User
+    # removeListenedAlbum(id: ID!): User
     # removeReview(id: ID!): User
     # deleteFollower(id: ID!): User
   }

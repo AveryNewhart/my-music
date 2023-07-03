@@ -8,10 +8,11 @@ import {
 import { Modal, ModalHeader, ModalBody, ModalFooter } from 'react-bootstrap';
 
 import { useParams } from "react-router-dom";
-import { useQuery, useMutation } from '@apollo/client';
-import { REMOVE_LISTENED_ALBUM, REMOVE_WANNA_LISTEN_ALBUM
-  // , REMOVE_REVIEW 
-} from '../utils/mutations';
+import { useQuery, 
+  // useMutation 
+} from '@apollo/client';
+// import { REMOVE_LISTENED_ALBUM, REMOVE_WANNA_LISTEN_ALBUM, REMOVE_REVIEW 
+// } from '../utils/mutations';
 import { QUERY_PROTECTED } from "../utils/queries";
 import ProfilePicture from '../components/ProfilePicture';
 import "../styles/UserCard.css";
@@ -40,20 +41,15 @@ const UserCard = () => {
   }, [data]);
 
   // eslint-disable-next-line
-  const [removeListenedAlbum, { loading: listenedAlbumLoading, error: listenedAlbumError }] = useMutation(REMOVE_LISTENED_ALBUM);
+  //! remove buttons under construction
+  // const [removeListenedAlbum, { loading: listenedAlbumLoading, error: listenedAlbumError }] = useMutation(REMOVE_LISTENED_ALBUM);
+  // const [removeListenedAlbum] = useMutation(REMOVE_LISTENED_ALBUM, {
+  //   refetchQueries: [{ query: QUERY_PROTECTED }],
+  // });
   // eslint-disable-next-line
-  const [removeWannaListenAlbum, { loading: wannaListenAlbumLoading, error: wannaListenAlbumError }] = useMutation(REMOVE_WANNA_LISTEN_ALBUM);
+  // const [removeWannaListenAlbum, { loading: wannaListenAlbumLoading, error: wannaListenAlbumError }] = useMutation(REMOVE_WANNA_LISTEN_ALBUM);
   // const [removeReview, { loading: reviewLoading, error: reviewError }] = useMutation(REMOVE_REVIEW);
 
-   // Query current user data
-  //  const { loading, data } = useQuery(QUERY_PROTECTED);
-  // const { loading, data } = useQuery(QUERY_PROTECTED, 
-  //   {
-  //   variables: { username },
-  // });
-
-   // Check if user data is present else provide empty obj
-  //  const user = data?.protected;
    console.log(user)
 
    const handleTabClick = (tabName) => {
@@ -73,34 +69,34 @@ const UserCard = () => {
     // const user = data.user;
     if (!user) return <p>User not found</p>;
 
-// Call the mutations
-const handleRemoveListenedAlbum = async (id) => {
-  try {
-    const response = await removeListenedAlbum({ variables: { id } });
-    const updatedUser = response.data.removeListenedAlbum;
-    // user.listenedAlbums = updatedUser.listenedAlbums;
-    setUser((prevUser) => ({
-      ...prevUser,
-      listenedAlbums: updatedUser.listenedAlbums,
-    }));
-  } catch (error) {
-    // Handle the error...
-  }
-};
+//! remove buttons under construction
+// const handleRemoveListenedAlbum = async (id) => {
+//   try {
+//     const response = await removeListenedAlbum({ variables: { id } });
+//     const updatedUser = response.data.removeListenedAlbum;
+//     // user.listenedAlbums = updatedUser.listenedAlbums;
+//     setUser((prevUser) => ({
+//       ...prevUser,
+//       listenedAlbums: updatedUser.listenedAlbums,
+//     }));
+//   } catch (error) {
+//     // Handle the error...
+//   }
+// };
 
-const handleRemoveWannaListenAlbum = async (id) => {
-  try {
-    const response = await removeWannaListenAlbum({ variables: { id } });
-    const updatedUser = response.data.removeWannaListenAlbum;
-    // user.listenedAlbums = updatedUser.listenedAlbums;
-    setUser((prevUser) => ({
-      ...prevUser,
-      wannaListenAlbums: updatedUser.wannaListenAlbums,
-    }));
-  } catch (error) {
-    // Handle the error...
-  }
-};
+// const handleRemoveWannaListenAlbum = async (id) => {
+//   try {
+//     const response = await removeWannaListenAlbum({ variables: { id } });
+//     const updatedUser = response.data.removeWannaListenAlbum;
+//     // user.listenedAlbums = updatedUser.listenedAlbums;
+//     setUser((prevUser) => ({
+//       ...prevUser,
+//       wannaListenAlbums: updatedUser.wannaListenAlbums,
+//     }));
+//   } catch (error) {
+//     // Handle the error...
+//   }
+// };
 
 // const handleRemoveReview = async (id) => {
 //   try {
@@ -174,12 +170,12 @@ const handleRemoveWannaListenAlbum = async (id) => {
                 <p className='musicText'>Artist: {album.artistName}</p>
                 <p className='musicText'>Album: {album.albumName}</p>
                 <p className='musicText'>Release Date: {album.releaseDate}</p>
-                <button
+                {/* <button
                   className="profBut"
                   onClick={() => handleRemoveListenedAlbum(album.id)}
                 >
                   Delete
-                </button>
+                </button> */}
               </div>
             ))}
         </div>
@@ -196,12 +192,12 @@ const handleRemoveWannaListenAlbum = async (id) => {
                 <p className='musicText'>Artist: {album.artistName}</p>
                 <p className='musicText'>Album: {album.albumName}</p>
                 <p className='musicText'>Release Date: {album.releaseDate}</p>
-                <button
+                {/* <button
                   className="profBut"
                   onClick={() => handleRemoveWannaListenAlbum(album.id)}
                 >
                   Delete
-                </button>
+                </button> */}
               </div>
             ))}
         </div>

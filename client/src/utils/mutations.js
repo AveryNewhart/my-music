@@ -132,21 +132,21 @@ export const ADD_FOLLOWER = gql`
   }
 `;
 
-export const REMOVE_LISTENED_ALBUM = gql`
-  mutation removeListenedAlbum($id: ID!) {
-    removeListenedAlbum(id: $id) {
-      id
-    }
-  }
-`;
+// export const REMOVE_LISTENED_ALBUM = gql`
+//   mutation removeListenedAlbum($id: ID!) {
+//     removeListenedAlbum(id: $id) {
+//       id
+//     }
+//   }
+// `;
 
-export const REMOVE_WANNA_LISTEN_ALBUM = gql`
-  mutation removeWannaListenAlbum($id: ID!) {
-    removeWannaListenAlbum(id: $id) {
-      id
-    }
-  }
-`;
+// export const REMOVE_WANNA_LISTEN_ALBUM = gql`
+//   mutation removeWannaListenAlbum($id: ID!) {
+//     removeWannaListenAlbum(id: $id) {
+//       id
+//     }
+//   }
+// `;
 
 // export const REMOVE_REVIEW = gql`
 //   mutation removeReview($id: ID!) {

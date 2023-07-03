@@ -187,43 +187,45 @@ const resolvers = {
       }
     },
 
-    removeWannaListenAlbum: async (_, { id }, context) => {
-      if (!context.user) {
-        throw new AuthenticationError("You need to be logged in to delete albums.");
-      }
 
-      try {
-        const updatedUser = await User.findOneAndUpdate(
-          { _id: context.user._id },
-          { $pull: { wannaListenAlbums: id } },
-          { new: true }
-        ).populate("wannaListenAlbums");
+    //!remove buttons under construction
+    // removeWannaListenAlbum: async (_, { id }, context) => {
+    //   if (!context.user) {
+    //     throw new AuthenticationError("You need to be logged in to delete albums.");
+    //   }
 
-        return updatedUser;
-      } catch (error) {
-        console.log(error);
-        throw new Error("Failed to delete WannaListen album: " + error.message);
-      }
-    },
+    //   try {
+    //     const updatedUser = await User.findOneAndUpdate(
+    //       { _id: context.user._id },
+    //       { $pull: { wannaListenAlbums: id } },
+    //       { new: true }
+    //     ).populate("wannaListenAlbums");
 
-    removeListenedAlbum: async (_, { id }, context) => {
-      if (!context.user) {
-        throw new AuthenticationError("You need to be logged in to delete albums.");
-      }
+    //     return updatedUser;
+    //   } catch (error) {
+    //     console.log(error);
+    //     throw new Error("Failed to delete WannaListen album: " + error.message);
+    //   }
+    // },
 
-      try {
-        const updatedUser = await User.findOneAndUpdate(
-          { _id: context.user._id },
-          { $pull: { listenedAlbums: id } },
-          { new: true }
-        ).populate("listenedAlbums");
+    // removeListenedAlbum: async (_, { id }, context) => {
+    //   if (!context.user) {
+    //     throw new AuthenticationError("You need to be logged in to delete albums.");
+    //   }
 
-        return updatedUser;
-      } catch (error) {
-        console.log(error);
-        throw new Error("Failed to delete WannaListen album: " + error.message);
-      }
-    },
+    //   try {
+    //     const updatedUser = await User.findOneAndUpdate(
+    //       { _id: context.user._id },
+    //       { $pull: { listenedAlbums: id } },
+    //       { new: true }
+    //     ).populate("listenedAlbums");
+
+    //     return updatedUser;
+    //   } catch (error) {
+    //     console.log(error);
+    //     throw new Error("Failed to delete WannaListen album: " + error.message);
+    //   }
+    // },
 
     // removeReview: async (_, { id }, context) => {
     //   if (!context.user) {
