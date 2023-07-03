@@ -60,8 +60,10 @@ try {
 //   }
 // };
 
-module.exports = {
-  searchAlbums: getAlbumData
-  // ,
-  // getArtists: getArtists
-};
+export const searchAlbums = getAlbumData;
+
+// module.exports = {
+//   searchAlbums: getAlbumData
+//   // ,
+//   // getArtists: getArtists
+// };

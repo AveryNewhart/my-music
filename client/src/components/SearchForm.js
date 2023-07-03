@@ -2,7 +2,6 @@ import React, { useState
   // , useEffect 
 } from 'react';
 import { searchAlbums
-  // , getArtists
  } from '../api/api';
 import "../styles/SearchForm.css"
  
