@@ -48,10 +48,26 @@ a.nav-link:hover {
     left: 0;
   }
 
+  .toggle-icon span {
+    background-color: #5bc0be;
+    color: hsl(263, 87%, 35%);
+  }
+
 @media (max-width: 576px) {
 
     .header-head {
       text-align: center;
+    }
+
+    .centerSearch {
+      align-items: center;
+    }
+
+    .back-nav {
+      display: flex;
+      /* align-items: center; */
+      /* justify-content: center; */
+      flex-direction: column;
     }
 
 }

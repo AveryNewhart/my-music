@@ -30,11 +30,11 @@ export default function Navigation() {
         <>
             <Navbar collapseOnSelect fixed='top' expand='sm' className="back-nav">
                 <h1 className="header-head">My Music</h1>
-      <SearchForm onSearch={handleSearchResults} 
+      <SearchForm className="centerSearch" onSearch={handleSearchResults} 
       albums={searchResults} 
       />
                 <Container>
-                    <Navbar.Toggle aria-controls='responsive-navbar-nav' className='container-pos'/>
+                    <Navbar.Toggle aria-controls='responsive-navbar-nav' className='container-pos toggle-icon'/>
                     <Navbar.Collapse id='responsive-navbar-nav'>
                         <Nav className="container-pos link-text">
                             {/* <Nav.Link href='/'>Homepage</Nav.Link> */}

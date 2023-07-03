@@ -17,5 +17,14 @@
 
 .searchBut {
     font-family: "Rubik Puddles";
-}
+} 
+
+@media (max-width: 576px) {
+    .centerMe {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+  
   

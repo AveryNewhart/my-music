@@ -69,7 +69,7 @@ const SearchForm = ({ onSearch }) => {
   };
 
   return (
-    <div style={{ display: 'flex', alignItems: 'center' }}>
+    <div className="centerMe" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             <input
         type="text"
         value={searchTerm}
