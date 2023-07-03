@@ -82,7 +82,11 @@ const typeDefs = gql`
     addReview(input: AddReviewInput): User
     saveToListened(album: AlbumInput): User
     saveToWannaListen(album: AlbumInput): User
-    addFollower(id: ID!): User   # Add this mutation to follow a user
+    addFollower(id: ID!): User
+    removeWannaListenAlbum(id: ID!): User
+    removeListenedAlbum(id: ID!): User
+    # removeReview(id: ID!): User
+    # deleteFollower(id: ID!): User
   }
 `;
 

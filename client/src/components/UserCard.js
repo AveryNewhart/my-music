@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import {
   MDBCard,
   MDBCardBody,
@@ -8,7 +8,10 @@ import {
 import { Modal, ModalHeader, ModalBody, ModalFooter } from 'react-bootstrap';
 
 import { useParams } from "react-router-dom";
-import { useQuery } from '@apollo/client';
+import { useQuery, useMutation } from '@apollo/client';
+import { REMOVE_LISTENED_ALBUM, REMOVE_WANNA_LISTEN_ALBUM
+  // , REMOVE_REVIEW 
+} from '../utils/mutations';
 import { QUERY_PROTECTED } from "../utils/queries";
 import ProfilePicture from '../components/ProfilePicture';
 import "../styles/UserCard.css";
@@ -19,22 +22,38 @@ import DeafultPic from "../images/defaultprof.png"
 // Define the Login form component
 const UserCard = () => {
   const { username } = useParams();
+  const { loading, data } = useQuery(QUERY_PROTECTED, 
+    {
+    variables: { username },
+  });
 
   // eslint-disable-next-line
   const [activeTab, setActiveTab] = useState('followers');
   const [activeSection, setActiveSection] = useState('listened');
   const [followersModalOpen, setFollowersModalOpen] = useState(false);
   const [followingModalOpen, setFollowingModalOpen] = useState(false);
+  // const [user, setUser] = useState(data?.protected);
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    setUser(data?.protected);
+  }, [data]);
+
+  // eslint-disable-next-line
+  const [removeListenedAlbum, { loading: listenedAlbumLoading, error: listenedAlbumError }] = useMutation(REMOVE_LISTENED_ALBUM);
+  // eslint-disable-next-line
+  const [removeWannaListenAlbum, { loading: wannaListenAlbumLoading, error: wannaListenAlbumError }] = useMutation(REMOVE_WANNA_LISTEN_ALBUM);
+  // const [removeReview, { loading: reviewLoading, error: reviewError }] = useMutation(REMOVE_REVIEW);
 
    // Query current user data
   //  const { loading, data } = useQuery(QUERY_PROTECTED);
-  const { loading, data } = useQuery(QUERY_PROTECTED, 
-    {
-    variables: { username },
-  });
+  // const { loading, data } = useQuery(QUERY_PROTECTED, 
+  //   {
+  //   variables: { username },
+  // });
 
    // Check if user data is present else provide empty obj
-   const user = data?.protected;
+  //  const user = data?.protected;
    console.log(user)
 
    const handleTabClick = (tabName) => {
@@ -53,6 +72,50 @@ const UserCard = () => {
   
     // const user = data.user;
     if (!user) return <p>User not found</p>;
+
+// Call the mutations
+const handleRemoveListenedAlbum = async (id) => {
+  try {
+    const response = await removeListenedAlbum({ variables: { id } });
+    const updatedUser = response.data.removeListenedAlbum;
+    // user.listenedAlbums = updatedUser.listenedAlbums;
+    setUser((prevUser) => ({
+      ...prevUser,
+      listenedAlbums: updatedUser.listenedAlbums,
+    }));
+  } catch (error) {
+    // Handle the error...
+  }
+};
+
+const handleRemoveWannaListenAlbum = async (id) => {
+  try {
+    const response = await removeWannaListenAlbum({ variables: { id } });
+    const updatedUser = response.data.removeWannaListenAlbum;
+    // user.listenedAlbums = updatedUser.listenedAlbums;
+    setUser((prevUser) => ({
+      ...prevUser,
+      wannaListenAlbums: updatedUser.wannaListenAlbums,
+    }));
+  } catch (error) {
+    // Handle the error...
+  }
+};
+
+// const handleRemoveReview = async (id) => {
+//   try {
+//     const response = await removeReview({ variables: { id } });
+//     const updatedUser = response.data.removeReview;
+//     // user.listenedAlbums = updatedUser.listenedAlbums;
+//     setUser((prevUser) => ({
+//       ...prevUser,
+//       reviews: updatedUser.reviews,
+//     }));
+//   } catch (error) {
+//     // Handle the error...
+//   }
+// };
+    
 
     return (
   <MDBCard className="card-container">
@@ -105,12 +168,18 @@ const UserCard = () => {
         {activeSection === "listened" && <h3>Listened Albums</h3>}
         <div className="album-list">
           {activeSection === "listened" &&
-            user.listenedAlbums.map((album, index) => (
+            user?.listenedAlbums?.map((album, index) => (
               <div key={index} className="album">
                 <img src={album.albumPic} alt="" className="coverArt" />
                 <p className='musicText'>Artist: {album.artistName}</p>
                 <p className='musicText'>Album: {album.albumName}</p>
                 <p className='musicText'>Release Date: {album.releaseDate}</p>
+                <button
+                  className="profBut"
+                  onClick={() => handleRemoveListenedAlbum(album.id)}
+                >
+                  Delete
+                </button>
               </div>
             ))}
         </div>
@@ -121,12 +190,18 @@ const UserCard = () => {
         {activeSection === "wannaListen" && <h3>Wanna Listen Albums</h3>}
         <div className="album-list">
           {activeSection === "wannaListen" &&
-            user.wannaListenAlbums.map((album, index) => (
+            user?.wannaListenAlbums?.map((album, index) => (
               <div key={index} className="album">
                 <img src={album.albumPic} alt="" className="coverArt" />
                 <p className='musicText'>Artist: {album.artistName}</p>
                 <p className='musicText'>Album: {album.albumName}</p>
                 <p className='musicText'>Release Date: {album.releaseDate}</p>
+                <button
+                  className="profBut"
+                  onClick={() => handleRemoveWannaListenAlbum(album.id)}
+                >
+                  Delete
+                </button>
               </div>
             ))}
         </div>
@@ -138,10 +213,16 @@ const UserCard = () => {
         {activeSection === "reviews" && <h3>Reviews</h3>}
         <div className="album-list">
           {activeSection === "reviews" &&
-            user.reviews.map((review, index) => (
+            user?.reviews?.map((review, index) => (
               <div key={index} className="album reviewDiv">
                 <p className='musicText'>Album: {review.albumName}</p>
                 <p className='reviewText'>Review: {review.reviewText}</p>
+                {/* <button
+                  className="delete-button"
+                  onClick={() => handleRemoveReview(review.id)}
+                >
+                  Delete
+                </button> */}
               </div>
             ))}
         </div>
