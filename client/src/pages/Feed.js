@@ -5,7 +5,7 @@ import Navigation from '../components/Navigation';
 import { useNavigate} from 'react-router-dom';
 import "../styles/Feed.css";
 
-
+ 
 // riley was here
 
 const Feed = () => {
@@ -39,17 +39,16 @@ const Feed = () => {
 <div>
   <Navigation />
   <div className="feed-container">
-  <h1>Feed Page</h1>
   <ul>
     {sortedReviews.length > 0 ? (
       sortedReviews.reverse().map((review, index) => (
         <li key={index} className="post-container">
           {/* <h2>{review.username}</h2> */}
-          <button onClick={() => navigate(`/anyprofile/${review.username}`)}>
+          <button className="postBut" onClick={() => navigate(`/anyprofile/${review.username}`)}>
             {review.username}
           </button>
-          <p>Album: {review.albumName}</p>
-          <p>Review: {review.reviewText}</p>
+          <p className='musicText'>Album: {review.albumName}</p>
+          <p className='reviewText'>Review: {review.reviewText}</p>
         </li>
       ))
     ) : (

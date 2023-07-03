@@ -5,19 +5,19 @@
     justify-content: center;
     padding: 20px;
   }
-
+ 
   .feed-container ul {
     list-style-type: none;
   }
   
   .feed-container li {
-    border: 1px solid #ccc;
+    border: 1px solid hsl(263, 87%, 35%);
     padding: 20px;
     margin-bottom: 20px;
   }
 
   .post-container {
-    border: 1px solid #ccc;
+    border: 1px solid hsl(263, 87%, 35%);
     border-radius: 8px;
     padding: 20px;
     margin-bottom: 20px;
@@ -31,6 +31,22 @@
   
   .post-container p {
     margin-bottom: 5px;
+  }
+
+  .postBut {
+    background: hsl(263, 87%, 35%);
+    font-size: 1.5rem;
+    border: none;
+    color: #5bc0be;
+    border-radius: 10%;
+    padding: 5px;
+    font-family: "Rubik Puddles";
+  }
+
+  .postBut:hover {
+    box-shadow: 0 0 5px hsl(263, 87%, 35%), 0 0 25px hsl(263, 87%, 35%), 0 0 50px hsl(263, 87%, 35%);
+    background-color: #5bc0be;
+    color: hsl(263, 87%, 35%);
   }
   
   /* Media queries for mobile responsiveness */
