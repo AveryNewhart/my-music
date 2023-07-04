@@ -126,7 +126,7 @@ const Signup = () => {
                 onChange={handleInputChange} 
                 name="email"
                  />
-                <MDBInput labelClass='loginLabel' label='Password' type='text' id='formControlDefault' 
+                <MDBInput labelClass='loginLabel' label='Password' type='password' id='formControlDefault' 
                 // value={userFormData.password}
                 onChange={handleInputChange}
                 name="password" 
